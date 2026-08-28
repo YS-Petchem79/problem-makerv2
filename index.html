@@ -7,7 +7,9 @@
     <!-- 데모 데이터 로드 (GitHub Pages 배포용) -->
     <script src="./data/demo-problems.js"></script>
     <script>
-        // demo-problems.js 로드 확인
+        // demo-problems.js 로드 확인 - 중복 로드 방지
+        let demoProblemsLoaded = false;
+        
         function checkDemoProblems() {
             console.log('Checking DEMO_PROBLEMS...');
             if (!window.DEMO_PROBLEMS) {
@@ -20,22 +22,30 @@
             }
             console.log('✓ DEMO_PROBLEMS loaded:', window.DEMO_PROBLEMS.length, 'problems');
             if (window.DEMO_PROBLEMS.length > 0) {
-                console.log('First problem sample:', window.DEMO_PROBLEMS[0].id, window.DEMO_PROBLEMS[0].type, window.DEMO_PROBLEMS[0].difficulty);
+                console.log('First problem sample:', {
+                    id: window.DEMO_PROBLEMS[0].id,
+                    type: window.DEMO_PROBLEMS[0].type,
+                    difficulty: window.DEMO_PROBLEMS[0].difficulty
+                });
             }
+            demoProblemsLoaded = true;
             return true;
         }
         
-        // 페이지 로드 후 3초 후 재확인 (동적 로드 완료 대기)
+        // 페이지 로드 후 동적 로드 확인
         window.addEventListener('load', function() {
             setTimeout(() => {
-                if (!checkDemoProblems()) {
-                    console.warn('Trying alternative path...');
+                if (!demoProblemsLoaded && (!window.DEMO_PROBLEMS || window.DEMO_PROBLEMS.length === 0)) {
+                    console.warn('DEMO_PROBLEMS not loaded, trying alternative path...');
                     const script = document.createElement('script');
                     script.src = './data/demo-problems.js';
+                    script.onerror = () => console.error('Failed to load demo-problems.js');
                     script.onload = () => {
                         setTimeout(checkDemoProblems, 500);
                     };
                     document.head.appendChild(script);
+                } else {
+                    checkDemoProblems();
                 }
             }, 500);
         });
