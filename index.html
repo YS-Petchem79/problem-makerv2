@@ -316,6 +316,7 @@
                     <div id="solutionText"></div>
                 </div>                <div class="button-group next-button">
                     <button class="btn-secondary" onclick="resetQuiz()">처음으로</button>
+                    <button class="btn-secondary" id="skipBtn" onclick="skipQuestion()" style="display: none; background: #fff4e6; border-color: #ffb74d; color: #f57f17;">❓ 모르겠음</button>
                     <button class="btn-primary" id="nextBtn" disabled>다음 문제</button>
                 </div>
             </div>
@@ -548,6 +549,10 @@
             nextBtn.textContent = '다음 문제';
             nextBtn.onclick = () => nextProblem();
 
+            // 모르겠음 버튼 표시 여부
+            const skipBtn = document.getElementById('skipBtn');
+            skipBtn.style.display = problem.type === 'multiple_choice' ? 'none' : 'block';
+            
             // 문제 유형에 따라 다른 입력 방식 제공
             if (problem.type === 'multiple_choice' && problem.options && problem.options.length > 0) {
                 // 객관식: 선택지 버튼
@@ -629,15 +634,33 @@
             }
         }
 
+        function skipQuestion() {
+            // 모르겠음 버튼: 빈 답으로 진행
+            answers[currentQuestion] = '';
+            nextProblem();
+        }
+
+        function skipQuestion() {
+            // 모르겠음 버튼: 빈 답으로 진행
+            answers[currentQuestion] = '';
+            nextProblem();
+        }
+
         async function nextProblem() {
-            // 1단계: 답변 선택 확인
-            if (answers[currentQuestion] === null || answers[currentQuestion] === '') {
-                alert('답을 선택하세요!');
+            const problem = quizData[currentQuestion];
+            
+            // 1단계: 답변 선택 확인 (객관식만 필수)
+            if (problem.type === 'multiple_choice' && answers[currentQuestion] === null) {
+                alert('선택지를 선택하세요!');
                 return;
+            }
+            
+            // 다른 유형은 빈 답도 허용
+            if (answers[currentQuestion] === null) {
+                answers[currentQuestion] = '';
             }
 
             // 2단계: 정답/오답 확인 및 해설 표시
-            const problem = quizData[currentQuestion];
             const correctAnswer = problem.answer || (problem.options ? problem.options[0] : null);
             let userAnswer;
             
