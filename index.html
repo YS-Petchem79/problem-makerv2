@@ -179,6 +179,28 @@
         .option-item.correct { border: 2px solid #34a853; background: #e6f4ea; color: #137333; }
         .option-item.incorrect { border: 2px solid #ea4335; background: #fce8e6; color: #c5221f; }
         
+        /* 답변 입력 필드 */
+        .answer-input-group { margin-bottom: 24px; }
+        .answer-input-group textarea,
+        .answer-input-group input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #dadce0;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+            transition: all 0.2s;
+            min-height: 50px;
+        }
+        .answer-input-group textarea:focus,
+        .answer-input-group input[type="text"]:focus {
+            outline: none;
+            border-color: #4285f4;
+            box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.1);
+        }
+        .answer-input-group textarea { resize: vertical; min-height: 100px; }
+        .answer-input-placeholder { font-size: 13px; color: #9aa0a6; margin-top: 8px; }
+        
         .solution { 
             margin-top: 24px; 
             padding: 20px; 
@@ -520,8 +542,15 @@
 
             const optionsDiv = document.getElementById('options');
             optionsDiv.innerHTML = '';
+            
+            const nextBtn = document.getElementById('nextBtn');
+            nextBtn.disabled = true;
+            nextBtn.textContent = '다음 문제';
+            nextBtn.onclick = () => nextProblem();
 
-            if (problem.options && problem.options.length > 0) {
+            // 문제 유형에 따라 다른 입력 방식 제공
+            if (problem.type === 'multiple_choice' && problem.options && problem.options.length > 0) {
+                // 객관식: 선택지 버튼
                 problem.options.forEach((option, index) => {
                     const optionDiv = document.createElement('div');
                     optionDiv.className = 'option-item';
@@ -529,35 +558,80 @@
                     optionDiv.onclick = () => selectAnswer(index);
                     optionsDiv.appendChild(optionDiv);
                 });
+                
+                // 이미 답변했으면 선택 상태 복원
+                if (answers[currentQuestion] !== null && typeof answers[currentQuestion] === 'number') {
+                    const selectedOption = optionsDiv.children[answers[currentQuestion]];
+                    if (selectedOption) selectedOption.classList.add('selected');
+                }
+            } else if (problem.type === 'essay') {
+                // 서술형: 텍스트 영역
+                const group = document.createElement('div');
+                group.className = 'answer-input-group';
+                const textarea = document.createElement('textarea');
+                textarea.id = 'answerInput';
+                textarea.placeholder = '답변을 입력하세요...';
+                textarea.value = answers[currentQuestion] || '';
+                textarea.oninput = () => selectAnswer(textarea.value);
+                group.appendChild(textarea);
+                group.appendChild(document.createElement('div')).className = 'answer-input-placeholder';
+                optionsDiv.appendChild(group);
+                nextBtn.disabled = false; // 서술형은 빈 답도 진행 가능
+                textarea.focus();
+            } else if (problem.type === 'short_answer' || problem.type === 'calculation') {
+                // 단답형/계산형: 텍스트 입력
+                const group = document.createElement('div');
+                group.className = 'answer-input-group';
+                const input = document.createElement('input');
+                input.id = 'answerInput';
+                input.type = 'text';
+                input.placeholder = problem.type === 'calculation' ? '계산 결과를 입력하세요...' : '답을 입력하세요...';
+                input.value = answers[currentQuestion] || '';
+                input.oninput = () => selectAnswer(input.value);
+                input.onkeypress = (e) => {
+                    if (e.key === 'Enter' && answers[currentQuestion]) {
+                        nextProblem();
+                    }
+                };
+                group.appendChild(input);
+                optionsDiv.appendChild(group);
+                nextBtn.disabled = false; // 빈 답이라도 진행 가능
+                input.focus();
             } else {
-                console.warn('선택지가 없음:', problem);
+                console.warn('지원하지 않는 문제 유형:', problem.type);
             }
 
             document.getElementById('solution').classList.add('hidden');
             
-            // 다음 버튼 초기 상태 설정
-            const nextBtn = document.getElementById('nextBtn');
-            nextBtn.disabled = true;
-            nextBtn.textContent = '다음 문제';
-            nextBtn.onclick = () => nextProblem();
-
-            if (answers[currentQuestion] !== null) {
-                const selectedOption = optionsDiv.children[answers[currentQuestion]];
-                if (selectedOption) selectedOption.classList.add('selected');
-            }
-
             // 문제 풀이 시간 측정 시작
             questionStartTime = Date.now();
-        }function selectAnswer(index) {
-            answers[currentQuestion] = index;
-            const optionsDiv = document.getElementById('options');
-            Array.from(optionsDiv.children).forEach((child, i) => {
-                child.classList.remove('selected');
-            });
-            optionsDiv.children[index].classList.add('selected');
-        }        async function nextProblem() {
+        }
+
+        function selectAnswer(answer) {
+            answers[currentQuestion] = answer;
+            const problem = quizData[currentQuestion];
+            
+            // 객관식인 경우만 선택 상태 UI 업데이트
+            if (problem.type === 'multiple_choice' && typeof answer === 'number') {
+                const optionsDiv = document.getElementById('options');
+                Array.from(optionsDiv.children).forEach((child, i) => {
+                    child.classList.remove('selected');
+                });
+                if (optionsDiv.children[answer]) {
+                    optionsDiv.children[answer].classList.add('selected');
+                }
+            }
+            
+            // 다음 버튼 활성화 (답변이 있을 경우)
+            const nextBtn = document.getElementById('nextBtn');
+            if (answers[currentQuestion] !== null && answers[currentQuestion] !== '') {
+                nextBtn.disabled = false;
+            }
+        }
+
+        async function nextProblem() {
             // 1단계: 답변 선택 확인
-            if (answers[currentQuestion] === null) {
+            if (answers[currentQuestion] === null || answers[currentQuestion] === '') {
                 alert('답을 선택하세요!');
                 return;
             }
@@ -565,20 +639,31 @@
             // 2단계: 정답/오답 확인 및 해설 표시
             const problem = quizData[currentQuestion];
             const correctAnswer = problem.answer || (problem.options ? problem.options[0] : null);
-            const userAnswer = problem.options ? problem.options[answers[currentQuestion]] : answers[currentQuestion];
+            let userAnswer;
+            
+            if (problem.type === 'multiple_choice') {
+                // 객관식: 선택한 선택지
+                userAnswer = problem.options ? problem.options[answers[currentQuestion]] : null;
+            } else {
+                // 단답형/계산형/서술형: 입력한 텍스트
+                userAnswer = answers[currentQuestion];
+            }
+            
             const isCorrect = userAnswer === correctAnswer;
 
-            // 3단계: 옵션 시각적 업데이트 (정답/오답 표시)
-            const optionsDiv = document.getElementById('options');
-            Array.from(optionsDiv.children).forEach((child, i) => {
-                child.classList.remove('selected');
-                if (problem.options && problem.options[i] === correctAnswer) {
-                    child.classList.add('correct');
-                }
-                else if (i === answers[currentQuestion] && !isCorrect) {
-                    child.classList.add('incorrect');
-                }
-            });
+            // 3단계: 옵션 시각적 업데이트 (정답/오답 표시) - 객관식만 해당
+            if (problem.type === 'multiple_choice') {
+                const optionsDiv = document.getElementById('options');
+                Array.from(optionsDiv.children).forEach((child, i) => {
+                    child.classList.remove('selected');
+                    if (problem.options && problem.options[i] === correctAnswer) {
+                        child.classList.add('correct');
+                    }
+                    else if (i === answers[currentQuestion] && !isCorrect) {
+                        child.classList.add('incorrect');
+                    }
+                });
+            }
 
             // 4단계: 해설 표시
             document.getElementById('solutionText').textContent = problem.explanation || problem.solution;
@@ -621,7 +706,7 @@
                     difficulty: problem.difficulty,
                     type: problem.type
                 });
-            }            // 9단계: 다음 버튼 활성화
+            }            // 9단계: 다음 버튼 활성화 및 설정
             const nextBtn = document.getElementById('nextBtn');
             nextBtn.disabled = false;
 
@@ -630,7 +715,11 @@
                 // 마지막 문제
                 nextBtn.textContent = reviewMode ? '복습 완료' : '제출하기';
                 nextBtn.onclick = () => showCompletion();
-            }        // 다음 문제 버튼은 displayProblem()에서 설정됨
+            } else {
+                // 중간 문제 - 다음 문제로 이동
+                nextBtn.textContent = '다음 문제';
+                nextBtn.onclick = () => moveToNextProblem();
+            }
         }
 
         /**
