@@ -1,507 +1,138 @@
-// 고등물리학 데모 문제셋 - GitHub Pages 배포용
-// 주제: 역학, 열역학, 파동, 전자기학
+// 고등물리학 데모 문제셋 - GitHub Pages 배포용 (100개)
+// 객관식 25개, 단답형 25개, 계산형 25개, 서술형 25개
+// 각 유형별 난이도: easy 10개, medium 10개, hard 5개
 
 const DEMO_PROBLEMS = [
-  // ============ 직선운동 (5개) ============
-  {
-    id: "physics_001",
-    question: "자동차가 정지 상태에서 출발하여 일정한 가속도로 5초 동안 주행했을 때, 속도가 20 m/s가 되었다. 자동차의 가속도는?",
-    type: "calculation",
-    difficulty: "easy",
-    concepts: ["가속도", "등가속도운동"],
-    options: [],
-    correctAnswer: "4 m/s²",
-    explanation: "등가속도운동의 기본 식: v = u + at\n초기속도 u = 0, 최종속도 v = 20 m/s, 시간 t = 5s\n20 = 0 + a × 5\na = 4 m/s²",
-    hints: ["v = u + at 공식을 사용하세요", "주어진 값을 정리하면: u=0, v=20, t=5"],
-    solutionSteps: ["주어진 값 정리: u=0, v=20 m/s, t=5s", "공식 v = u + at 적용", "20 = 0 + a×5", "a = 20÷5 = 4 m/s²"]
-  },
-  {
-    id: "physics_002",
-    question: "초기 속도 10 m/s로 움직이던 물체가 2 m/s²의 가속도로 8초 동안 가속할 때, 이동 거리는?",
-    type: "calculation",
-    difficulty: "easy",
-    concepts: ["거리", "등가속도운동"],
-    options: [],
-    correctAnswer: "144 m",
-    explanation: "등가속도운동의 거리 공식: s = ut + ½at²\nu = 10 m/s, a = 2 m/s², t = 8s\ns = 10(8) + ½(2)(8)²\ns = 80 + 64 = 144 m",
-    hints: ["s = ut + ½at² 공식을 사용하세요", "각 항을 계산: ut = 80, ½at² = 64"],
-    solutionSteps: ["공식 확인: s = ut + ½at²", "ut 계산: 10 × 8 = 80 m", "½at² 계산: ½ × 2 × 64 = 64 m", "총 거리: 80 + 64 = 144 m"]
-  },
-  {
-    id: "physics_003",
-    question: "수평면에서 같은 높이에서 던진 공 A와 공 B 중, 수평 방향 속도가 더 큰 공은 어디에 먼저 떨어질까?",
-    type: "multiple_choice",
-    difficulty: "easy",
-    concepts: ["포물선운동", "수평운동", "수직운동"],
-    options: ["공 A (수평 속도가 크므로)", "공 B (수평 속도가 작으므로)", "같은 시간에 떨어진다", "높이에 따라 달라진다"],
-    correctAnswer: "같은 시간에 떨어진다",
-    explanation: "포물선운동에서 수직 방향 운동과 수평 방향 운동은 독립적이다. \n수평 속도의 크기는 수직 낙하 시간에 영향을 주지 않는다.\n따라서 같은 높이에서 던진 두 공은 같은 시간에 땅에 닿는다. \n(단, 수평 거리는 다르다)",
-    hints: ["포물선운동에서 수평과 수직은 독립적인가?", "중력 가속도는 수평 속도에 영향을 받는가?"],
-    solutionSteps: ["포물선운동 분석: 수평운동과 수직운동은 독립적", "수직 방향: h = ½gt² (수평속도와 무관)", "따라서 떨어지는 시간은 같다"]
-  },
-  {
-    id: "physics_004",
-    question: "연직 위로 던진 물체의 최고점에서의 속도는 얼마인가?",
-    type: "short_answer",
-    difficulty: "easy",
-    concepts: ["연직운동", "속도"],
-    options: [],
-    correctAnswer: "0",
-    explanation: "연직 위로 던진 물체가 최고점에 도달할 때는 순간적으로 속도가 0이다. \n그 순간 이후 물체는 중력에 의해 다시 아래로 떨어진다.",
-    hints: ["최고점에서 물체의 운동 상태는?", "가속도 방향은 어디인가?"],
-    solutionSteps: ["최고점의 정의: 속도가 0인 지점", "이후 중력으로 인한 가속도만 작용"]
-  },
-  {
-    id: "physics_005",
-    question: "어떤 물체가 10 m/s의 속도로 움직이다가 5초 후에 정지했다. 이 동안의 평균 속도는?",
-    type: "calculation",
-    difficulty: "medium",
-    concepts: ["평균속도", "등감속도운동"],
-    options: [],
-    correctAnswer: "5 m/s",
-    explanation: "평균 속도 = 총 변위 / 총 시간\n등가속도운동에서: 평균 속도 = (초기속도 + 최종속도) / 2\n평균 속도 = (10 + 0) / 2 = 5 m/s",
-    hints: ["평균속도 = 총 변위 / 총 시간", "또는 = (v₁ + v₂) / 2"],
-    solutionSteps: ["공식: v_avg = (v₁ + v₂) / 2", "v₁ = 10 m/s, v₂ = 0 m/s", "v_avg = (10 + 0) / 2 = 5 m/s"]
-  },
+  // ================ 객관식 (25개) ================
+  // Easy (10개)
+  {id:"mc_easy_001",question:"물체의 속도가 일정하게 증가하는 운동을 무엇이라 하는가?",type:"multiple_choice",difficulty:"easy",concepts:["등가속도운동"],options:["균등운동","등가속도운동","원운동","포물선운동"],correctAnswer:"등가속도운동",explanation:"속도가 일정하게 증가하는 운동은 등가속도운동입니다. 이는 일정한 가속도를 가진 운동입니다.",hints:["속도가 계속 증가한다는 것은?","일정한 가속도를 생각해보세요"],solutionSteps:["속도 변화의 의미 파악","가속도의 정의 확인","정답 선택"]},
+  {id:"mc_easy_002",question:"뉴턴의 제1법칙(관성의 법칙)을 설명하는 것은?",type:"multiple_choice",difficulty:"easy",concepts:["관성"],options:["힘이 작용하면 속도가 증가한다","외력이 없으면 원래 상태를 유지한다","작용과 반작용은 같다","힘은 질량과 가속도의 곱이다"],correctAnswer:"외력이 없으면 원래 상태를 유지한다",explanation:"관성의 법칙: 외부 힘이 작용하지 않으면 정지한 물체는 계속 정지하고, 운동하는 물체는 계속 일정한 속도로 운동한다.",hints:["외력이 없을 때 물체는?","관성이란 원래 상태를 유지하려는 성질"],solutionSteps:["관성의 정의","뉴턴의 제1법칙 확인","정답 판단"]},
+  {id:"mc_easy_003",question:"절대온도 단위는?",type:"multiple_choice",difficulty:"easy",concepts:["절대온도"],options:["섭씨(°C)","화씨(°F)","켈빈(K)","라마(°R)"],correctAnswer:"켈빈(K)",explanation:"절대온도는 켈빈(K) 단위로 표현합니다. 절대영도는 0K = -273.15°C입니다.",hints:["절대영도가 0인 온도 단위는?","국제 표준 온도 단위"],solutionSteps:["온도 단위들 확인","절대영도의 의미","절대온도 단위 선택"]},
+  {id:"mc_easy_004",question:"파동이 다른 매질로 이동할 때 변하지 않는 것은?",type:"multiple_choice",difficulty:"easy",concepts:["파동","매질"],options:["속도","파장","진동수","진폭"],correctAnswer:"진동수",explanation:"파동이 다른 매질로 이동할 때 진동수(주파수)는 변하지 않습니다. 하지만 속도와 파장은 변합니다.",hints:["진동수는 파원의 특성이 결정","매질이 바뀌어도 진동수는 같다"],solutionSteps:["파동의 성질 확인","매질 변화 시 변하는 것","진동수 보존"]},
+  {id:"mc_easy_005",question:"같은 높이에서 동시에 던진 공 중 수평 방향 속도가 더 큰 공은?",type:"multiple_choice",difficulty:"easy",concepts:["포물선운동"],options:["먼저 떨어진다","나중에 떨어진다","같은 시간에 떨어진다","높이에 따라 다르다"],correctAnswer:"같은 시간에 떨어진다",explanation:"포물선운동에서 수평 방향과 수직 방향 운동은 독립적입니다. 수평 속도는 낙하 시간에 영향을 주지 않습니다.",hints:["수평과 수직 운동의 관계는?","중력은 수평 속도에 영향을 주는가?"],solutionSteps:["포물선운동 분석","수평운동과 수직운동의 독립성","낙하 시간 결정 요인"]},
+  {id:"mc_easy_006",question:"최고점에 도달한 연직 위로 던진 물체의 속도는?",type:"multiple_choice",difficulty:"easy",concepts:["연직운동"],options:["초기 속도와 같다","0이다","최대값이다","최소값이다"],correctAnswer:"0이다",explanation:"최고점에서는 순간적으로 속도가 0입니다. 그 후 중력에 의해 다시 아래로 떨어집니다.",hints:["최고점의 정의","속도 방향이 바뀌는 지점"],solutionSteps:["최고점의 의미","속도 변화","최고점에서의 속도"]},
+  {id:"mc_easy_007",question:"전류가 흐르는 직선 도체가 만드는 자기장의 방향은 어떻게 결정되는가?",type:"multiple_choice",difficulty:"easy",concepts:["자기장","오른손법칙"],options:["왼손 법칙","오른손 법칙","도체의 길이","전류의 크기"],correctAnswer:"오른손 법칙",explanation:"오른손의 엄지손가락이 전류 방향을 가리킬 때, 나머지 손가락이 감싸는 방향이 자기장의 방향입니다.",hints:["앙페르의 법칙","오른손 법칙의 적용"],solutionSteps:["오른손 법칙 이해","전류와 자기장의 관계","자기장 방향 결정"]},
+  {id:"mc_easy_008",question:"두 전하 사이의 정전기력은 거리의 몇 제곱에 반비례하는가?",type:"multiple_choice",difficulty:"easy",concepts:["쿨롱의법칙"],options:["1제곱","2제곱","3제곱","4제곱"],correctAnswer:"2제곱",explanation:"쿨롱의 법칙: F = kQ₁Q₂/r². 정전기력은 거리의 제곱에 반비례합니다.",hints:["쿨롱의 법칙","역제곱 법칙"],solutionSteps:["쿨롱의 법칙 확인","거리와 힘의 관계","제곱 지수"]},
+  {id:"mc_easy_009",question:"에너지 보존 법칙을 가장 잘 설명하는 것은?",type:"multiple_choice",difficulty:"easy",concepts:["에너지보존"],options:["에너지는 생성되거나 소멸된다","에너지는 형태만 바뀌고 총량은 보존된다","에너지는 감소한다","에너지는 항상 증가한다"],correctAnswer:"에너지는 형태만 바뀌고 총량은 보존된다",explanation:"에너지 보존 법칙: 고립된 계에서 에너지는 생성되거나 소멸될 수 없으며, 형태만 변한다.",hints:["에너지의 변환","총 에너지량"],solutionSteps:["에너지 보존의 의미","형태 변환 예시","총량의 불변성"]},
+  {id:"mc_easy_010",question:"보어 모형에서 전자가 기저상태(n=1)일 때의 에너지는?",type:"multiple_choice",difficulty:"easy",concepts:["보어모형"],options:["0","양수","음수","무한대"],correctAnswer:"음수",explanation:"기저상태의 에너지는 -13.6 eV로 음수입니다. 음수 에너지는 전자가 원자에 속박되어 있음을 의미합니다.",hints:["속박 상태의 에너지","이온화 에너지의 부호"],solutionSteps:["보어 모형의 에너지","기저상태의 의미","음수 에너지"]},
 
-  // ============ 뉴턴의 운동 법칙 (5개) ============
-  {
-    id: "physics_006",
-    question: "질량 2 kg인 물체에 10 N의 힘이 작용할 때 물체의 가속도는?",
-    type: "calculation",
-    difficulty: "easy",
-    concepts: ["뉴턴의 제2법칙", "힘", "가속도"],
-    options: [],
-    correctAnswer: "5 m/s²",
-    explanation: "뉴턴의 제2법칙: F = ma\n10 = 2 × a\na = 10 / 2 = 5 m/s²",
-    hints: ["F = ma를 사용하세요", "a = F / m"],
-    solutionSteps: ["공식: F = ma", "정리: a = F / m", "계산: a = 10 / 2 = 5 m/s²"]
-  },
-  {
-    id: "physics_007",
-    question: "수평면에 놓인 5 kg의 물체를 12 N의 힘으로 끌 때, 마찰력이 2 N이면 물체의 가속도는?",
-    type: "calculation",
-    difficulty: "medium",
-    concepts: ["뉴턴의 제2법칙", "마찰력", "합력"],
-    options: [],
-    correctAnswer: "2 m/s²",
-    explanation: "합력 = 적용 힘 - 마찰력 = 12 - 2 = 10 N\nF_net = ma에서:\n10 = 5 × a\na = 2 m/s²",
-    hints: ["먼저 합력을 구하세요", "F_net = F - f_friction"],
-    solutionSteps: ["합력 계산: F_net = 12 - 2 = 10 N", "뉴턴의 제2법칙: F_net = ma", "10 = 5 × a", "a = 2 m/s²"]
-  },
-  {
-    id: "physics_008",
-    question: "뉴턴의 제1법칙(관성의 법칙)을 설명하는 가장 적절한 예시는?",
-    type: "multiple_choice",
-    difficulty: "easy",
-    concepts: ["뉴턴의 제1법칙", "관성"],
-    options: ["버스가 급히 멈춰 승객이 앞으로 쏠린다", "자동차를 밀 때 밀수록 더 빨리 간다", "위로 던진 공이 다시 떨어진다", "달이 지구 주위를 계속 돈다"],
-    correctAnswer: "버스가 급히 멈춰 승객이 앞으로 쏠린다",
-    explanation: "관성의 법칙: 외력이 없으면 물체는 계속 같은 상태를 유지한다.\n버스가 급히 멈출 때 승객은 계속 앞으로 나아가려고 하는 관성 때문에 앞으로 쏠린다.",
-    hints: ["관성이란 외력이 없을 때 원래 상태를 유지하려는 성질", "어느 예시가 이를 가장 잘 보여주는가?"],
-    solutionSteps: ["관성의 정의 확인", "각 선택지 검토", "버스 예시: 버스 속도 변화 → 승객은 관성으로 계속 전진"]
-  },
-  {
-    id: "physics_009",
-    question: "질량 10 kg인 물체가 20 N의 일정한 힘을 받아 처음 정지 상태에서 10초 동안 가속한다. 최종 속도는?",
-    type: "calculation",
-    difficulty: "medium",
-    concepts: ["뉴턴의 제2법칙", "등가속도운동", "속도"],
-    options: [],
-    correctAnswer: "20 m/s",
-    explanation: "F = ma에서 가속도 구하기: a = F/m = 20/10 = 2 m/s²\nv = u + at에서: v = 0 + 2(10) = 20 m/s",
-    hints: ["먼저 가속도를 구하세요", "그 다음 속도 공식을 사용하세요"],
-    solutionSteps: ["가속도: a = F/m = 20/10 = 2 m/s²", "속도 공식: v = u + at", "v = 0 + 2 × 10 = 20 m/s"]
-  },
-  {
-    id: "physics_010",
-    question: "작용-반작용의 법칙(뉴턴의 제3법칙)에 따르면, 책상 위에 놓인 책에 대해 성립하는 것은?",
-    type: "multiple_choice",
-    difficulty: "medium",
-    concepts: ["뉴턴의 제3법칙", "작용반작용"],
-    options: ["책의 무게가 책상을 누르는 힘 = 책상이 책을 지지하는 힘", "책의 무게가 책상을 누르는 힘 > 책상이 책을 지지하는 힘", "책의 무게가 책상을 누르는 힘 < 책상이 책을 지지하는 힘", "책의 무게와 책상의 지지력은 무관하다"],
-    correctAnswer: "책의 무게가 책상을 누르는 힘 = 책상이 책을 지지하는 힘",
-    explanation: "작용-반작용: 한 물체가 다른 물체에 가하는 힘과 그 반대 힘은 크기가 같고 방향이 반대이다.\n책이 책상을 누르는 힘 = 책상이 책을 지지하는 힘",
-    hints: ["작용-반작용 법칙이란?", "두 힘의 크기 관계는?"],
-    solutionSteps: ["작용: 책이 책상을 누르는 힘", "반작용: 책상이 책을 지지하는 힘", "이 두 힘은 크기가 같고 방향이 반대"]
-  },
+  // Medium (10개)
+  {id:"mc_medium_001",question:"뉴턴의 제2법칙(F=ma)를 다시 쓰면 F = dp/dt이다. 여기서 p는?",type:"multiple_choice",difficulty:"medium",concepts:["뉴턴의제2법칙","운동량"],options:["압력","운동량","동력","에너지"],correctAnswer:"운동량",explanation:"운동량 p = mv입니다. 뉴턴의 제2법칙은 F = dp/dt로도 표현되며, 이는 힘이 운동량의 시간 변화율임을 의미합니다.",hints:["p = mv","운동량의 변화율"],solutionSteps:["기호 p의 의미","뉴턴의 제2법칙 형태","운동량 정의"]},
+  {id:"mc_medium_002",question:"완벽한 탄성충돌에서 보존되는 것은?",type:"multiple_choice",difficulty:"medium",concepts:["탄성충돌"],options:["운동량만","운동에너지만","운동량과 운동에너지 모두","속도만"],correctAnswer:"운동량과 운동에너지 모두",explanation:"탄성 충돌에서는 운동량과 운동에너지가 모두 보존됩니다. 비탄성 충돌에서는 운동량만 보존되고 에너지는 손실됩니다.",hints:["탄성과 비탄성 충돌의 차이","보존되는 물리량"],solutionSteps:["충돌 유형 분류","각각 보존되는 량","탄성충돌 확인"]},
+  {id:"mc_medium_003",question:"절대온도가 2배 증가하면 기체의 부피는? (압력 일정)",type:"multiple_choice",difficulty:"medium",concepts:["이상기체법칙"],options:["½배","2배","4배","변하지 않는다"],correctAnswer:"2배",explanation:"이상기체 법칙에서 P가 일정하면 V/T = 상수. 따라서 T가 2배이면 V도 2배입니다.",hints:["V/T = 상수","온도와 부피의 관계"],solutionSteps:["이상기체 법칙","압력 일정 조건","비례 관계"]},
+  {id:"mc_medium_004",question:"열역학 제1법칙 ΔU = Q - W에서 W는?",type:"multiple_choice",difficulty:"medium",concepts:["열역학제1법칙"],options:["흡수된 열","계가 외부에 한 일","내부에너지 변화","온도 변화"],correctAnswer:"계가 외부에 한 일",explanation:"열역학 제1법칙: ΔU = Q - W. 여기서 Q는 계가 흡수한 열, W는 계가 외부에 한 일입니다.",hints:["열역학 제1법칙의 의미","에너지 보존"],solutionSteps:["제1법칙 확인","각 항의 의미","W의 정의"]},
+  {id:"mc_medium_005",question:"파장이 절반이 되고 진동수가 2배가 되면 파동의 속도는?",type:"multiple_choice",difficulty:"medium",concepts:["파동"],options:["½배","2배","4배","변하지 않는다"],correctAnswer:"변하지 않는다",explanation:"v = fλ에서 f가 2배, λ가 ½배이면 v = 2f × λ/2 = fλ = 상수. 속도는 변하지 않습니다.",hints:["v = fλ","f와 λ의 관계"],solutionSteps:["파동 속도 공식","f와 λ의 변화","속도 계산"]},
+  {id:"mc_medium_006",question:"광전효과에서 가장 중요한 것은?",type:"multiple_choice",difficulty:"medium",concepts:["광전효과"],options:["빛의 세기","빛의 진동수","빛의 파장","물질의 색깔"],correctAnswer:"빛의 진동수",explanation:"광전효과: hf ≥ W. 일정 이상의 진동수를 가진 빛이어야 전자가 방출됩니다. 세기와는 무관합니다.",hints:["임계 진동수","아인슈타인의 광전 방정식"],solutionSteps:["광전효과 조건","진동수의 역할","일함수의 의미"]},
+  {id:"mc_medium_007",question:"자기장 속에서 움직이는 전하가 받는 로렌츠 힘의 방향은?",type:"multiple_choice",difficulty:"medium",concepts:["로렌츠힘"],options:["속도와 같은 방향","자기장과 같은 방향","속도와 자기장에 수직","임의의 방향"],correctAnswer:"속도와 자기장에 수직",explanation:"로렌츠 힘: F = q(v × B). 외적의 성질에 의해 F는 v와 B 모두에 수직입니다.",hints:["벡터의 외적","오른손 법칙"],solutionSteps:["로렌츠 힘 정의","외적의 성질","방향 결정"]},
+  {id:"mc_medium_008",question:"마찰이 없는 빗면에서 미끄러지는 물체의 가속도는?",type:"multiple_choice",difficulty:"medium",concepts:["평면운동","마찰"],options:["g","g sinθ","g cosθ","0"],correctAnswer:"g sinθ",explanation:"빗면의 각도가 θ일 때, 미끄러지는 물체의 가속도는 a = g sinθ입니다.",hints:["힘의 분해","마찰 없음"],solutionSteps:["빗면 분석","중력의 분해","가속도 계산"]},
+  {id:"mc_medium_009",question:"원형 코일이 자기장을 통과할 때 발생하는 유도 기전력은?",type:"multiple_choice",difficulty:"medium",concepts:["전자기유도"],options:["E = nBv","E = -dΦ/dt","E = ΔΦ/Δt","E = BIL"],correctAnswer:"E = -dΦ/dt",explanation:"파라데이의 전자기 유도 법칙: E = -dΦ/dt. 이는 자기선속 변화율의 음수입니다.",hints:["파라데이의 법칙","자기선속 변화"],solutionSteps:["파라데이 법칙","자기선속의 의미","유도 기전력"]},
+  {id:"mc_medium_010",question:"드브로이 파장 λ = h/p에서 h는?",type:"multiple_choice",difficulty:"medium",concepts:["드브로이파장"],options:["높이","플랑크 상수","운동량","주파수"],correctAnswer:"플랑크 상수",explanation:"드브로이 파장: λ = h/p. h는 플랑크 상수 (6.626 × 10⁻³⁴ J·s), p는 운동량입니다.",hints:["플랑크 상수의 기호","파동-입자 이중성"],solutionSteps:["드브로이 파장 공식","각 기호의 의미","플랑크 상수"]},
 
-  // ============ 일과 에너지 (5개) ============
-  {
-    id: "physics_011",
-    question: "10 N의 힘으로 물체를 5 m 이동시켰을 때 한 일은?",
-    type: "calculation",
-    difficulty: "easy",
-    concepts: ["일", "에너지"],
-    options: [],
-    correctAnswer: "50 J",
-    explanation: "일 = 힘 × 거리 × cosθ\n힘의 방향과 운동 방향이 같으므로 θ = 0°, cosθ = 1\nW = 10 × 5 × 1 = 50 J",
-    hints: ["W = Fs cosθ", "같은 방향이면 cosθ = 1"],
-    solutionSteps: ["공식: W = Fs cosθ", "각도: 0° (같은 방향)", "W = 10 × 5 × 1 = 50 J"]
-  },
-  {
-    id: "physics_012",
-    question: "질량 2 kg인 물체를 정지 상태에서 5 m/s의 속도로 가속시키는데 필요한 운동 에너지는?",
-    type: "calculation",
-    difficulty: "medium",
-    concepts: ["운동에너지", "에너지"],
-    options: [],
-    correctAnswer: "25 J",
-    explanation: "운동에너지: KE = ½mv²\nm = 2 kg, v = 5 m/s\nKE = ½ × 2 × 5² = ½ × 2 × 25 = 25 J",
-    hints: ["KE = ½mv²", "v² = 5² = 25"],
-    solutionSteps: ["공식: KE = ½mv²", "계산: KE = ½ × 2 × 25", "KE = 25 J"]
-  },
-  {
-    id: "physics_013",
-    question: "높이 10 m에 있는 질량 5 kg의 물체의 중력 포텐셜 에너지는? (g = 10 m/s²)",
-    type: "calculation",
-    difficulty: "easy",
-    concepts: ["중력포텐셜에너지", "위치에너지"],
-    options: [],
-    correctAnswer: "500 J",
-    explanation: "중력 포텐셜 에너지: PE = mgh\nm = 5 kg, g = 10 m/s², h = 10 m\nPE = 5 × 10 × 10 = 500 J",
-    hints: ["PE = mgh", "모든 값을 곱하면 된다"],
-    solutionSteps: ["공식: PE = mgh", "대입: PE = 5 × 10 × 10", "PE = 500 J"]
-  },
-  {
-    id: "physics_014",
-    question: "완벽한 탄성 충돌에서 보존되는 것은?",
-    type: "multiple_choice",
-    difficulty: "medium",
-    concepts: ["탄성충돌", "운동량", "에너지"],
-    options: ["운동량만 보존된다", "운동 에너지만 보존된다", "운동량과 운동 에너지 모두 보존된다", "속도만 보존된다"],
-    correctAnswer: "운동량과 운동 에너지 모두 보존된다",
-    explanation: "탄성 충돌: 충돌 전후에 운동량과 운동 에너지가 모두 보존되는 충돌\n비탄성 충돌: 운동량만 보존되고 운동 에너지는 일부 손실",
-    hints: ["탄성과 비탄성 충돌의 차이는?", "어떤 물리량이 보존되는가?"],
-    solutionSteps: ["탄성 충돌의 정의 확인", "보존되는 물리량: 운동량과 운동에너지"]
-  },
-  {
-    id: "physics_015",
-    question: "에너지 보존 법칙에 따라, 마찰이 없을 때 높이 20 m에서 떨어진 물체가 땅에 닿을 때의 속도는? (g = 10 m/s²)",
-    type: "calculation",
-    difficulty: "hard",
-    concepts: ["에너지보존", "운동에너지", "포텐셜에너지"],
-    options: [],
-    correctAnswer: "20 m/s",
-    explanation: "에너지 보존: PE = KE\nmgh = ½mv²\ngh = ½v²\nv² = 2gh = 2 × 10 × 20 = 400\nv = 20 m/s",
-    hints: ["포텐셜 에너지 = 운동 에너지", "v² = 2gh"],
-    solutionSteps: ["에너지 보존: mgh = ½mv²", "m 약분: gh = ½v²", "정리: v² = 2gh = 2 × 10 × 20 = 400", "v = √400 = 20 m/s"]
-  },
+  // Hard (5개)
+  {id:"mc_hard_001",question:"우주선 뮤온이 지표면에 도달할 수 있는 이유는?",type:"multiple_choice",difficulty:"hard",concepts:["시간팽창","상대성"],options:["매우 빠른 속도","시간팽창","시간수축","무한정한 수명"],correctAnswer:"시간팽창",explanation:"뮤온은 자신의 기준계에서는 매우 짧은 시간에 붕괴되지만, 지표면 관찰자의 기준계에서는 상대론적 시간팽창으로 인해 충분한 시간이 경과하여 도달할 수 있습니다.",hints:["특수상대성이론","시간팽창 현상"],solutionSteps:["뮤온의 반감기","빛의 속도에 가까운 속도","시간팽창 효과"]},
+  {id:"mc_hard_002",question:"양자역학에서 불확정성 원리는 무엇을 의미하는가?",type:"multiple_choice",difficulty:"hard",concepts:["불확정성원리"],options:["측정 오류가 크다","위치와 운동량을 동시에 정확히 알 수 없다","입자의 위치를 알 수 없다","입자의 속도를 측정할 수 없다"],correctAnswer:"위치와 운동량을 동시에 정확히 알 수 없다",explanation:"하이젠베르크의 불확정성 원리: Δx·Δp ≥ ℏ/2. 입자의 위치와 운동량을 동시에 정확히 결정할 수 없습니다.",hints:["하이젠베르크","양자역학의 기본"],solutionSteps:["불확정성 원리의 의미","수식 해석","물리적 의미"]},
+  {id:"mc_hard_003",question:"블랙홀의 슈바르츠실드 반지름 r_s = 2GM/c²에서 c는?",type:"multiple_choice",difficulty:"hard",concepts:["블랙홀"],options:["열용량","광속","용량","전기 전도도"],correctAnswer:"광속",explanation:"슈바르츠실드 반지름 공식에서 c는 광속(299,792,458 m/s)입니다. G는 만유인력상수, M은 질량입니다.",hints:["상대성이론","광속의 기호"],solutionSteps:["공식 분석","각 기호의 의미","광속의 역할"]},
+  {id:"mc_hard_004",question:"초전도체의 마이스너 효과는?",type:"multiple_choice",difficulty:"hard",concepts:["초전도성"],options:["전기 저항이 0이다","자기장이 완전히 배척된다","온도가 감소한다","전하가 이동한다"],correctAnswer:"자기장이 완전히 배척된다",explanation:"마이스너 효과: 초전도체는 외부 자기장을 완전히 배척하여 그 내부의 자기장을 0으로 만듭니다. 이는 단순한 저항 0보다 강한 성질입니다.",hints:["초전도체의 성질","반자성"],solutionSteps:["초전도성의 정의","마이스너 효과","완전 반자성"]},
+  {id:"mc_hard_005",question:"암흑물질과 암흑에너지의 가장 큰 차이는?",type:"multiple_choice",difficulty:"hard",concepts:["우주론"],options:["질량이 다르다","중력의 방향이 다르다","암흑에너지는 우주 팽창을 가속시킨다","암흑물질은 빛을 낸다"],correctAnswer:"암흑에너지는 우주 팽창을 가속시킨다",explanation:"암흑물질은 중력을 가하여 은하를 묶어 유지하고, 암흑에너지는 우주 팽창을 가속시킵니다. 이는 정반대의 효과입니다.",hints:["우주의 가속 팽창","중력 vs 반발력"],solutionSteps:["암흑물질의 역할","암흑에너지의 역할","근본적 차이"]},
 
-  // ============ 열역학 (4개) ============
-  {
-    id: "physics_016",
-    question: "절대온도가 2배 증가하면 기체의 부피는 (압력 일정할 때) 몇 배가 되는가?",
-    type: "calculation",
-    difficulty: "medium",
-    concepts: ["이상기체법칙", "온도", "부피"],
-    options: [],
-    correctAnswer: "2배",
-    explanation: "이상기체 법칙: PV = nRT\n압력 P가 일정하면: V/T = nR/P = 상수\nV₁/T₁ = V₂/T₂\nT₂ = 2T₁이면 V₂ = 2V₁",
-    hints: ["V/T = 상수", "온도가 2배면 부피도 2배"],
-    solutionSteps: ["이상기체법칙: PV = nRT", "P 일정: V ∝ T", "T가 2배 → V도 2배"]
-  },
-  {
-    id: "physics_017",
-    question: "열역학 제1법칙을 설명하는 가장 적절한 표현은?",
-    type: "multiple_choice",
-    difficulty: "medium",
-    concepts: ["열역학제1법칙", "에너지보존"],
-    options: ["에너지는 생성되거나 소멸될 수 없다", "높은 온도에서 낮은 온도로만 열이 이동한다", "엔트로피는 항상 증가한다", "절대영도에 도달할 수 없다"],
-    correctAnswer: "에너지는 생성되거나 소멸될 수 없다",
-    explanation: "열역학 제1법칙 = 에너지 보존 법칙\nΔU = Q - W (내부에너지 변화 = 흡수열 - 한 일)\n에너지는 형태만 바뀌고 총량은 보존된다.",
-    hints: ["열역학 제1법칙과 에너지 보존의 관계는?", "ΔU = Q - W"],
-    solutionSteps: ["열역학 제1법칙의 정의", "에너지 형태 변환", "총 에너지량은 보존"]
-  },
-  {
-    id: "physics_018",
-    question: "20°C의 물 100 g에 1000 J의 열을 가했을 때 최종 온도는? (물의 비열 = 4186 J/(kg·°C))",
-    type: "calculation",
-    difficulty: "hard",
-    concepts: ["비열", "열량"],
-    options: [],
-    correctAnswer: "약 2.4°C 증가 → 약 22.4°C",
-    explanation: "Q = mcΔT\n1000 = 0.1 × 4186 × ΔT\nΔT = 1000 / (0.1 × 4186) ≈ 2.39°C\n최종온도 = 20 + 2.39 ≈ 22.4°C",
-    hints: ["Q = mcΔT", "질량을 kg 단위로 변환하세요"],
-    solutionSteps: ["공식: Q = mcΔT", "정리: ΔT = Q/(mc)", "계산: ΔT = 1000 / (0.1 × 4186) ≈ 2.39°C", "최종온도 = 20 + 2.39 ≈ 22.4°C"]
-  },
-  {
-    id: "physics_019",
-    question: "열역학 제2법칙을 가장 잘 설명하는 것은?",
-    type: "multiple_choice",
-    difficulty: "hard",
-    concepts: ["열역학제2법칙", "엔트로피"],
-    options: ["고립된 계의 엔트로피는 항상 증가한다", "열은 저온에서 고온으로 자발적으로 이동할 수 없다", "모든 자발적 과정에서 엔트로피는 증가한다", "위 모두 맞다"],
-    correctAnswer: "위 모두 맞다",
-    explanation: "열역학 제2법칙의 여러 표현:\n1) 엔트로피 표현: 고립된 계의 엔트로피는 증가한다\n2) 클라우지우스 표현: 열은 저온에서 고온으로 자발적으로 이동할 수 없다\n3) 켈빈-플랑크 표현: 열을 완전히 일로 변환하는 순환과정은 불가능하다\n모두 동등한 표현이다.",
-    hints: ["열역학 제2법칙의 다양한 표현", "엔트로피와 자발성"],
-    solutionSteps: ["제1 표현: 엔트로피 증가", "제2 표현: 열의 일방향 흐름", "제3 표현: 순환과정의 한계", "모두 동등"]
-  },
+  // ================ 단답형 (25개) ================
+  // Easy (10개)
+  {id:"sa_easy_001",question:"속도 공식 v = u + at에서 t는 무엇을 나타내는가?",type:"short_answer",difficulty:"easy",concepts:["등가속도운동"],options:[],correctAnswer:"시간",explanation:"등가속도운동의 기본 공식에서 t는 시간을 나타냅니다. u는 초기 속도, a는 가속도, v는 최종 속도입니다.",hints:["공식의 각 변수는?","시간 단위를 생각해보세요"],solutionSteps:["공식 분석","변수의 의미","시간의 역할"]},
+  {id:"sa_easy_002",question:"뉴턴의 제2법칙을 나타내는 공식은?",type:"short_answer",difficulty:"easy",concepts:["뉴턴의제2법칙"],options:[],correctAnswer:"F = ma",explanation:"뉴턴의 제2법칙: F = ma. 힘(F) = 질량(m) × 가속도(a).",hints:["힘, 질량, 가속도의 관계","가장 기본적인 공식"],solutionSteps:["뉴턴의 운동 법칙 3가지","제2법칙","공식 표현"]},
+  {id:"sa_easy_003",question:"진동수(주파수)의 단위는?",type:"short_answer",difficulty:"easy",concepts:["진동수"],options:[],correctAnswer:"Hz (헤르츠)",explanation:"진동수의 단위는 Hz(헤르츠)입니다. 1초에 몇 번 반복되는지를 나타냅니다.",hints:["1초당 반복 횟수","주파수의 단위"],solutionSteps:["진동수의 정의","국제 단위계","Hz의 의미"]},
+  {id:"sa_easy_004",question:"전하의 단위는?",type:"short_answer",difficulty:"easy",concepts:["전하"],options:[],correctAnswer:"C (쿨롱)",explanation:"전하의 단위는 C(쿨롱)입니다. 1C = 1A·s (암페어·초).",hints:["전하량의 단위","전류와의 관계"],solutionSteps:["전기량의 정의","국제 단위","쿨롱"]},
+  {id:"sa_easy_005",question:"파동의 파장을 나타내는 기호는?",type:"short_answer",difficulty:"easy",concepts:["파장"],options:[],correctAnswer:"λ (람다)",explanation:"파장은 λ(람다)로 나타냅니다. 한 파동이 한 주기를 진행하는 거리입니다.",hints:["그리스 문자","파동의 공간적 성질"],solutionSteps:["파동의 성질","기호 확인","람다"]},
+  {id:"sa_easy_006",question:"에너지 보존 법칙에서 포텐셜 에너지는 무엇으로 변환되는가?",type:"short_answer",difficulty:"easy",concepts:["에너지변환"],options:[],correctAnswer:"운동에너지",explanation:"높이에서의 포텐셜 에너지가 감소하면 그에 해당하는 운동에너지가 증가합니다.",hints:["높이에서 떨어질 때","에너지 형태의 변환"],solutionSteps:["위치에너지","운동에너지","변환 관계"]},
+  {id:"sa_easy_007",question:"절대영도의 온도는 몇도인가?",type:"short_answer",difficulty:"easy",concepts:["절대온도"],options:[],correctAnswer:"0K 또는 -273.15°C",explanation:"절대영도: 0K = -273.15°C. 물질의 모든 원자 운동이 멈추는 이론적 최저 온도입니다.",hints:["물질의 최저 온도","켈빈과 섭씨의 변환"],solutionSteps:["절대영도의 의미","켈빈 단위","섭씨와의 변환"]},
+  {id:"sa_easy_008",question:"원운동하는 물체의 구심가속도를 나타내는 공식은?",type:"short_answer",difficulty:"easy",concepts:["원운동"],options:[],correctAnswer:"a = v²/r 또는 a = ω²r",explanation:"구심가속도: a = v²/r = ω²r. v는 선속도, ω는 각속도, r은 반지름입니다.",hints:["원운동의 가속도","속도와 반지름의 관계"],solutionSteps:["원운동 분석","중심을 향한 가속도","공식"]},
+  {id:"sa_easy_009",question:"광속의 값은?",type:"short_answer",difficulty:"easy",concepts:["광속"],options:[],correctAnswer:"3 × 10⁸ m/s 또는 299,792,458 m/s",explanation:"광속(light speed) c = 3 × 10⁸ m/s (정확히는 299,792,458 m/s).",hints:["빛의 속도","우주에서 최대 속도"],solutionSteps:["광속의 정의","값","단위"]},
+  {id:"sa_easy_010",question:"만유인력상수 G의 값은 약?",type:"short_answer",difficulty:"easy",concepts:["만유인력"],options:[],correctAnswer:"6.67 × 10⁻¹¹ N·m²/kg²",explanation:"만유인력상수 G ≈ 6.67 × 10⁻¹¹ N·m²/kg².",hints:["뉴턴의 만유인력 법칙","상수값"],solutionSteps:["만유인력의 정의","상수 G","단위"]},
 
-  // ============ 파동 (4개) ============
-  {
-    id: "physics_020",
-    question: "파동의 속도 = 파장 × ?",
-    type: "short_answer",
-    difficulty: "easy",
-    concepts: ["파동", "파장", "진동수"],
-    options: [],
-    correctAnswer: "진동수 (또는 주파수)",
-    explanation: "파동의 기본 관계식: v = fλ\nv: 파동의 속도\nf: 진동수(주파수)\nλ: 파장",
-    hints: ["v = fλ", "f는 진동수"],
-    solutionSteps: ["파동의 기본식: v = fλ", "v = 파장 × ?", "? = 진동수(f)"]
-  },
-  {
-    id: "physics_021",
-    question: "파장 0.5 m, 진동수 10 Hz인 파동의 속도는?",
-    type: "calculation",
-    difficulty: "easy",
-    concepts: ["파동속도", "파장", "진동수"],
-    options: [],
-    correctAnswer: "5 m/s",
-    explanation: "v = fλ\nf = 10 Hz, λ = 0.5 m\nv = 10 × 0.5 = 5 m/s",
-    hints: ["v = fλ를 사용하세요"],
-    solutionSteps: ["공식: v = fλ", "대입: v = 10 × 0.5", "v = 5 m/s"]
-  },
-  {
-    id: "physics_022",
-    question: "진동수가 두 배가 되고 파장이 반이 되면, 파동의 속도는?",
-    type: "multiple_choice",
-    difficulty: "medium",
-    concepts: ["파동속도", "파장", "진동수"],
-    options: ["½ 배가 된다", "2배가 된다", "4배가 된다", "변하지 않는다"],
-    correctAnswer: "변하지 않는다",
-    explanation: "v = fλ\n새로운 속도: v' = (2f) × (λ/2) = fλ = v\n진동수가 2배, 파장이 ½배이면 속도는 변하지 않는다.",
-    hints: ["v = fλ의 관계를 유지하는가?", "f와 λ의 변화를 동시에 고려하세요"],
-    solutionSteps: ["원래: v = fλ", "변화 후: v' = 2f × (λ/2)", "v' = fλ", "속도는 변하지 않음"]
-  },
-  {
-    id: "physics_023",
-    question: "소리가 공기에서 물로 지나갈 때 변하지 않는 것은?",
-    type: "multiple_choice",
-    difficulty: "medium",
-    concepts: ["굴절", "파동", "매질"],
-    options: ["속도", "파장", "진동수", "모두 변한다"],
-    correctAnswer: "진동수",
-    explanation: "파동이 다른 매질로 이동할 때:\n- 속도: 매질에 따라 변한다\n- 파장: 속도가 변하면 파장도 변한다 (v = fλ)\n- 진동수: 변하지 않는다 (파원의 진동수는 매질에 무관)\nf는 상수이므로 v = fλ에서 v가 변하면 λ도 변한다.",
-    hints: ["매질이 바뀔 때 어떤 것이 보존되는가?", "f와 v와 λ의 관계"],
-    solutionSteps: ["다른 매질 진입 시", "진동수는 보존: f = 상수", "속도는 매질 의존: v 변함", "파장도 변함: λ = v/f"]
-  },
+  // Medium (10개)
+  {id:"sa_medium_001",question:"충돌하는 두 물체의 반발계수(e) = 0.8일 때 이 충돌은 어떤 충돌인가?",type:"short_answer",difficulty:"medium",concepts:["충돌"],options:[],correctAnswer:"부분탄성충돌",explanation:"반발계수: 0 < e < 1일 때 부분탄성충돌. e=1은 완벽한 탄성충돌, e=0은 완벽한 비탄성충돌입니다.",hints:["반발계수의 범위","충돌의 종류"],solutionSteps:["반발계수 정의","범위별 분류","부분탄성충돌"]},
+  {id:"sa_medium_002",question:"물체가 수평면에서 정지 상태를 유지하기 위한 최소 조건은?",type:"short_answer",difficulty:"medium",concepts:["정적평형"],options:[],correctAnswer:"모든 힘의 합이 0이어야 한다",explanation:"정적 평형 조건: 합력 = 0 (ΣF = 0) 및 합 토크 = 0 (Στ = 0).",hints:["뉴턴의 제1법칙","평형의 조건"],solutionSteps:["평형의 정의","힘의 조건","토크의 조건"]},
+  {id:"sa_medium_003",question:"이상기체 상태방정식은?",type:"short_answer",difficulty:"medium",concepts:["이상기체법칙"],options:[],correctAnswer:"PV = nRT",explanation:"이상기체 상태방정식: PV = nRT. P는 압력, V는 부피, n은 몰수, R은 기체상수, T는 절대온도입니다.",hints:["기체의 상태 방정식","각 변수의 의미"],solutionSteps:["상태방정식","변수 정의","공식"]},
+  {id:"sa_medium_004",question:"전자기파의 속도는 무엇과 같은가?",type:"short_answer",difficulty:"medium",concepts:["전자기파"],options:[],correctAnswer:"광속 (c = 3 × 10⁸ m/s)",explanation:"진공에서 전자기파의 속도는 광속과 같습니다. 모든 전자기파(라디오파, 마이크로파, 가시광선, X선 등)가 같은 속도로 이동합니다.",hints:["진공에서의 속도","광속과의 관계"],solutionSteps:["전자기파의 성질","속도 결정","광속"]},
+  {id:"sa_medium_005",question:"운동에너지 공식은?",type:"short_answer",difficulty:"medium",concepts:["운동에너지"],options:[],correctAnswer:"KE = ½mv²",explanation:"운동에너지: KE = ½mv². m은 질량, v는 속도입니다.",hints:["속도의 제곱에 비례","질량에 비례"],solutionSteps:["운동에너지의 정의","공식","변수"]},
+  {id:"sa_medium_006",question:"중력 포텐셜 에너지 공식은?",type:"short_answer",difficulty:"medium",concepts:["포텐셜에너지"],options:[],correctAnswer:"PE = mgh",explanation:"중력 포텐셜 에너지: PE = mgh. m은 질량, g는 중력가속도, h는 높이입니다.",hints:["높이에 비례","질량에 비례"],solutionSteps:["포텐셜 에너지","정의","공식"]},
+  {id:"sa_medium_007",question:"파동의 기본 관계식은?",type:"short_answer",difficulty:"medium",concepts:["파동"],options:[],correctAnswer:"v = fλ",explanation:"파동의 속도: v = fλ. f는 진동수, λ는 파장입니다.",hints:["속도, 진동수, 파장의 관계","가장 기본적인 파동 식"],solutionSteps:["파동의 성질","관계식","변수"]},
+  {id:"sa_medium_008",question:"쿨롱의 법칙을 나타내는 공식은?",type:"short_answer",difficulty:"medium",concepts:["쿨롱의법칙"],options:[],correctAnswer:"F = kQ₁Q₂/r²",explanation:"쿨롱의 법칙: F = kQ₁Q₂/r². k는 쿨롱 상수, Q₁과 Q₂는 전하, r은 거리입니다.",hints:["거리의 제곱에 반비례","전하의 곱에 비례"],solutionSteps:["정전력","쿨롱의 법칙","공식"]},
+  {id:"sa_medium_009",question:"만유인력 법칙을 나타내는 공식은?",type:"short_answer",difficulty:"medium",concepts:["만유인력"],options:[],correctAnswer:"F = Gm₁m₂/r²",explanation:"만유인력 법칙: F = Gm₁m₂/r². G는 만유인력상수, m₁과 m₂는 질량, r은 거리입니다.",hints:["질량의 곱에 비례","거리의 제곱에 반비례"],solutionSteps:["중력","만유인력 법칙","공식"]},
+  {id:"sa_medium_010",question:"도플러 효과에서 음원이 관찰자에게 접근하면 관측 주파수는?",type:"short_answer",difficulty:"medium",concepts:["도플러효과"],options:[],correctAnswer:"증가한다",explanation:"도플러 효과: 음원이 관찰자에게 접근하면 관측 주파수가 증가합니다. 멀어지면 감소합니다.",hints:["음원의 상대 운동","주파수 변화"],solutionSteps:["도플러 효과","음원 접근","주파수 변화"]},
 
-  // ============ 전기장 (4개) ============
-  {
-    id: "physics_024",
-    question: "두 점전하 사이의 정전기력은 거리의 제곱에 역비례한다. 이것은?",
-    type: "short_answer",
-    difficulty: "easy",
-    concepts: ["쿨롱의법칙", "정전력"],
-    options: [],
-    correctAnswer: "쿨롱의 법칙",
-    explanation: "쿨롱의 법칙: F = kQ₁Q₂/r²\nF ∝ 1/r²\n두 점전하 사이의 힘은 거리의 제곱에 반비례한다.",
-    hints: ["거리의 제곱에 역비례한다는 법칙의 이름은?"],
-    solutionSteps: ["거리 제곱에 반비례", "이는 쿨롱의 법칙"]
-  },
-  {
-    id: "physics_025",
-    question: "전기장 E = 1000 N/C인 곳에 전하 q = 2 × 10⁻⁶ C가 있을 때, 전하가 받는 힘은?",
-    type: "calculation",
-    difficulty: "medium",
-    concepts: ["전기장", "전하", "힘"],
-    options: [],
-    correctAnswer: "2 × 10⁻³ N (또는 0.002 N)",
-    explanation: "전기장의 정의: F = qE\nF = 2 × 10⁻⁶ × 1000\nF = 2 × 10⁻³ N = 0.002 N",
-    hints: ["F = qE", "단위를 정확히 계산하세요"],
-    solutionSteps: ["공식: F = qE", "대입: F = 2 × 10⁻⁶ × 1000", "F = 2 × 10⁻³ N"]
-  },
-  {
-    id: "physics_026",
-    question: "두 평행 판 사이의 전기장은 판의 면적이 커지면 어떻게 되는가? (판의 전하량 일정)",
-    type: "multiple_choice",
-    difficulty: "hard",
-    concepts: ["전기장", "평행판커패시터"],
-    options: ["증가한다", "감소한다", "변하지 않는다", "판의 거리에만 의존한다"],
-    correctAnswer: "변하지 않는다",
-    explanation: "평행 판 커패시터의 전기장: E = σ/ε₀ = Q/(Aε₀)\n... 실제로는 E = V/d이고,\n판의 면적이 커지면 용량 C = ε₀A/d가 커지지만,\n전하량이 일정하면 V = Q/C가 작아지므로\nE = V/d는 결과적으로 일정하다.",
-    hints: ["E = V/d", "면적과 용량의 관계", "전하량 일정 조건"],
-    solutionSteps: ["평행판: E = V/d", "C = ε₀A/d", "Q 일정이면 V = Q/C", "면적 증가 → 용량 증가 → 전압 감소", "결과: E는 불변"]
-  },
-  {
-    id: "physics_027",
-    question: "양성자와 전자 사이의 정전력이 1 N이라면, 거리를 2배로 하면 정전력은?",
-    type: "calculation",
-    difficulty: "medium",
-    concepts: ["쿨롱의법칙", "정전력", "거리"],
-    options: [],
-    correctAnswer: "0.25 N",
-    explanation: "쿨롱의 법칙: F ∝ 1/r²\nr → 2r이면\nF' = F/(2²) = F/4 = 1/4 N = 0.25 N",
-    hints: ["F ∝ 1/r²", "r이 2배면 F는 1/4로 감소"],
-    solutionSteps: ["쿨롱: F ∝ 1/r²", "원래: F = 1 N, r = r₀", "변화 후: r' = 2r₀", "F' = F × (r₀/2r₀)² = F/4", "F' = 0.25 N"]
-  },
+  // Hard (5개)
+  {id:"sa_hard_001",question:"특수상대성이론에서 시간팽창 공식의 형태는?",type:"short_answer",difficulty:"hard",concepts:["시간팽창"],options:[],correctAnswer:"t = t₀/√(1-v²/c²) 또는 t = γt₀",explanation:"시간팽창: t = t₀/√(1-v²/c²) = γt₀. 여기서 γ = 1/√(1-v²/c²)는 로렌츠 인수입니다.",hints:["로렌츠 변환","상대성의 결과"],solutionSteps:["특수상대성이론","시간팽창","공식"]},
+  {id:"sa_hard_002",question:"질량-에너지 동치 관계식은?",type:"short_answer",difficulty:"hard",concepts:["상대성"],options:[],correctAnswer:"E = mc²",explanation:"질량-에너지 동치(Mass-energy equivalence): E = mc². 물질은 에너지로 변환될 수 있고, 에너지는 물질로 변환될 수 있습니다.",hints:["아인슈타인의 공식","질량과 에너지의 관계"],solutionSteps:["상대성이론","질량과 에너지","동치 관계"]},
+  {id:"sa_hard_003",question:"플랑크 상수의 값은 약?",type:"short_answer",difficulty:"hard",concepts:["양자론"],options:[],correctAnswer:"6.626 × 10⁻³⁴ J·s",explanation:"플랑크 상수: h ≈ 6.626 × 10⁻³⁴ J·s. 양자역학의 기본 상수입니다.",hints:["양자 현상","기본 상수"],solutionSteps:["양자론","플랑크 상수","값"]},
+  {id:"sa_hard_004",question:"슈뢰딩거 방정식은 무엇을 나타내는가?",type:"short_answer",difficulty:"hard",concepts:["양자역학"],options:[],correctAnswer:"입자의 파동 함수의 시간 진화",explanation:"슈뢰딩거 방정식은 양자계의 파동 함수가 시간에 따라 어떻게 변하는지를 기술하는 미분방정식입니다.",hints:["양자역학의 기본","파동함수"],solutionSteps:["양자역학","슈뢰딩거","의미"]},
+  {id:"sa_hard_005",question:"카오스 이론에서 초기조건에 대한 민감성을 무엇이라 하는가?",type:"short_answer",difficulty:"hard",concepts:["카오스이론"],options:[],correctAnswer:"나비 효과 (버터플라이 효과)",explanation:"나비 효과: 초기조건의 아주 작은 변화가 전혀 다른 결과를 초래하는 현상. 카오스 시스템의 특징입니다.",hints:["나비의 날개짓","민감성"],solutionSteps:["카오스 이론","초기 조건","나비 효과"]},
 
-  // ============ 자기장 (4개) ============
-  {
-    id: "physics_028",
-    question: "직선 전류가 만드는 자기장의 방향은 오른손 법칙으로 결정된다. 이를 '로렌츠 법칙'이라고 하나?",
-    type: "multiple_choice",
-    difficulty: "medium",
-    concepts: ["자기장", "오른손법칙", "전류"],
-    options: ["예, 맞다", "아니다, 비오-사바르 법칙이다", "아니다, 앙페르 법칙이다", "상황에 따라 다르다"],
-    correctAnswer: "아니다, 앙페르 법칙이다",
-    explanation: "오른손 법칙은 앙페르 법칙(Ampère's Law)의 표현방식이다.\n로렌츠 힘: 자기장 속의 전하나 전류가 받는 힘\nF = qv × B",
-    hints: ["오른손 법칙과 앙페르 법칙의 관계", "로렌츠 힘의 정의"],
-    solutionSteps: ["오른손 법칙: 자기장 방향 결정", "이는 앙페르 법칙의 표현", "로렌츠 힘은 다른 개념"]
-  },
-  {
-    id: "physics_029",
-    question: "자기장 B = 0.5 T에 수직으로 놓인 길이 L = 2 m인 전선에 I = 3 A의 전류가 흐를 때, 전선이 받는 힘은?",
-    type: "calculation",
-    difficulty: "medium",
-    concepts: ["자기력", "전류", "자기장"],
-    options: [],
-    correctAnswer: "3 N",
-    explanation: "자기장 속 전류 도체의 힘: F = BIL (수직일 때)\nF = 0.5 × 3 × 2 = 3 N",
-    hints: ["F = BIL", "수직이므로 sin(90°) = 1"],
-    solutionSteps: ["공식: F = BIL sinθ", "수직: θ = 90°, sin(90°) = 1", "F = 0.5 × 3 × 2 = 3 N"]
-  },
-  {
-    id: "physics_030",
-    question: "자기장 속에서 움직이는 양의 전하가 받는 로렌츠 힘의 방향은?",
-    type: "multiple_choice",
-    difficulty: "hard",
-    concepts: ["로렌츠힘", "속도", "자기장"],
-    options: ["속도 방향과 같다", "자기장 방향과 같다", "속도와 자기장에 모두 수직이다", "상황에 따라 다르다"],
-    correctAnswer: "속도와 자기장에 모두 수직이다",
-    explanation: "로렌츠 힘: F = q(v × B)\n외적의 성질에 의해 F는 v와 B 모두에 수직이다.\n오른손 법칙: 손가락이 v, 둘째손가락이 B를 가리킬 때,\n엄지손가락 방향이 F의 방향",
-    hints: ["벡터의 외적 v × B의 방향은?", "오른손 법칙 적용"],
-    solutionSteps: ["로렌츠 힘: F = q(v × B)", "외적의 성질: v ⊥ F, B ⊥ F", "오른손 법칙으로 방향 결정"]
-  },
-  {
-    id: "physics_031",
-    question: "원형 코일이 자기장을 통과할 때 발생하는 유도 기전력의 크기는?",
-    type: "multiple_choice",
-    difficulty: "hard",
-    concepts: ["전자기유도", "파라데이법칙", "자기선속"],
-    options: ["E = -dΦ/dt", "E = nΦBv", "E = ΔΦ/Δt", "위 모두 맞다"],
-    correctAnswer: "위 모두 맞다",
-    explanation: "파라데이의 전자기 유도 법칙:\nE = -dΦ/dt (미분 형태)\nE = -ΔΦ/Δt (평균 형태)\nn이 코일 수일 때: E = -n dΦ/dt\n모두 동등한 표현이다.",
-    hints: ["파라데이의 법칙의 다양한 형태", "미분과 평균 형태의 관계"],
-    solutionSteps: ["파라데이 법칙: E = -dΦ/dt", "평균형: E = -ΔΦ/Δt", "다중 코일: E = -n dΦ/dt", "모두 등가"]
-  },
+  // ================ 계산형 (25개) ================
+  // Easy (10개)
+  {id:"calc_easy_001",question:"자동차가 정지 상태에서 출발하여 일정한 가속도로 5초 동안 주행했을 때, 속도가 20 m/s가 되었다. 자동차의 가속도는?",type:"calculation",difficulty:"easy",concepts:["가속도"],options:[],correctAnswer:"4 m/s²",explanation:"v = u + at에서 u=0, v=20 m/s, t=5s. 따라서 20 = 0 + a×5, a = 4 m/s²",hints:["v = u + at","초기 속도는 0"],solutionSteps:["공식 확인","값 대입","계산"]},
+  {id:"calc_easy_002",question:"질량 2 kg인 물체에 10 N의 힘이 작용할 때 물체의 가속도는?",type:"calculation",difficulty:"easy",concepts:["뉴턴의제2법칙"],options:[],correctAnswer:"5 m/s²",explanation:"F = ma에서 a = F/m = 10/2 = 5 m/s²",hints:["F = ma","a = F/m"],solutionSteps:["공식","대입","계산"]},
+  {id:"calc_easy_003",question:"초기 속도 10 m/s로 움직이던 물체가 2 m/s²의 가속도로 8초 동안 가속할 때, 이동 거리는?",type:"calculation",difficulty:"easy",concepts:["거리"],options:[],correctAnswer:"144 m",explanation:"s = ut + ½at² = 10(8) + ½(2)(8²) = 80 + 64 = 144 m",hints:["s = ut + ½at²","각 항 계산"],solutionSteps:["공식","ut 계산","½at² 계산","합계"]},
+  {id:"calc_easy_004",question:"높이 10 m에서 떨어진 물체의 중력 포텐셜 에너지는? (m = 5 kg, g = 10 m/s²)",type:"calculation",difficulty:"easy",concepts:["포텐셜에너지"],options:[],correctAnswer:"500 J",explanation:"PE = mgh = 5 × 10 × 10 = 500 J",hints:["PE = mgh","모든 값 곱하기"],solutionSteps:["공식","대입","계산"]},
+  {id:"calc_easy_005",question:"질량 2 kg인 물체를 정지 상태에서 5 m/s의 속도로 가속시키는데 필요한 운동 에너지는?",type:"calculation",difficulty:"easy",concepts:["운동에너지"],options:[],correctAnswer:"25 J",explanation:"KE = ½mv² = ½ × 2 × 5² = 1 × 25 = 25 J",hints:["KE = ½mv²","v² = 25"],solutionSteps:["공식","v² 계산","최종 계산"]},
+  {id:"calc_easy_006",question:"파장 0.5 m, 진동수 10 Hz인 파동의 속도는?",type:"calculation",difficulty:"easy",concepts:["파동속도"],options:[],correctAnswer:"5 m/s",explanation:"v = fλ = 10 × 0.5 = 5 m/s",hints:["v = fλ"],solutionSteps:["공식","대입","계산"]},
+  {id:"calc_easy_007",question:"전기장 E = 1000 N/C에서 전하 q = 2 × 10⁻⁶ C가 받는 힘은?",type:"calculation",difficulty:"easy",concepts:["전기장"],options:[],correctAnswer:"2 × 10⁻³ N",explanation:"F = qE = 2 × 10⁻⁶ × 1000 = 2 × 10⁻³ N",hints:["F = qE","과학 기수법"],solutionSteps:["공식","대입","계산"]},
+  {id:"calc_easy_008",question:"반지름 0.5 m인 원형 궤도에서 4 m/s의 속도로 회전하는 물체의 구심가속도는?",type:"calculation",difficulty:"easy",concepts:["구심가속도"],options:[],correctAnswer:"32 m/s²",explanation:"a = v²/r = 4²/0.5 = 16/0.5 = 32 m/s²",hints:["a = v²/r","v² = 16"],solutionSteps:["공식","v² 계산","나누기"]},
+  {id:"calc_easy_009",question:"10 N의 힘으로 물체를 5 m 이동시켰을 때 한 일은?",type:"calculation",difficulty:"easy",concepts:["일"],options:[],correctAnswer:"50 J",explanation:"W = F × s = 10 × 5 = 50 J",hints:["W = Fs","같은 방향"],solutionSteps:["공식","대입","계산"]},
+  {id:"calc_easy_010",question:"두 점전하 Q₁ = 2 C, Q₂ = 3 C 사이의 거리가 1 m일 때 정전기력은? (k = 9 × 10⁹ N·m²/C²)",type:"calculation",difficulty:"easy",concepts:["쿨롱의법칙"],options:[],correctAnswer:"54 × 10⁹ N",explanation:"F = kQ₁Q₂/r² = 9 × 10⁹ × 2 × 3 / 1² = 54 × 10⁹ N",hints:["F = kQ₁Q₂/r²","거리 = 1m"],solutionSteps:["공식","대입","계산"]},
 
-  // ============ 원자 구조 (4개) ============
-  {
-    id: "physics_032",
-    question: "보어 모형에서 에너지가 가장 낮은 전자 궤도(기저상태)의 에너지는?",
-    type: "multiple_choice",
-    difficulty: "hard",
-    concepts: ["보어모형", "에너지준위", "수소원자"],
-    options: ["0", "양수", "음수", "무한대"],
-    correctAnswer: "음수",
-    explanation: "보어 모형: E_n = -13.6 eV / n²\nn = 1 (기저상태): E = -13.6 eV (음수)\n음수 에너지는 전자가 원자핵에 속박되어 있음을 의미한다.",
-    hints: ["전자가 원자에 속박되어 있으면 에너지는?", "이온화에너지의 부호"],
-    solutionSteps: ["보어 모형: E_n = -13.6/n² eV", "n=1: E = -13.6 eV", "음의 에너지는 속박 상태"]
-  },
-  {
-    id: "physics_033",
-    question: "광전 효과(광전자 방출)에서 중요한 것은?",
-    type: "multiple_choice",
-    difficulty: "medium",
-    concepts: ["광전효과", "광자", "일함수"],
-    options: ["빛의 세기만 중요하다", "빛의 진동수만 중요하다", "빛의 파장만 중요하다", "에너지만 중요하다"],
-    correctAnswer: "빛의 진동수만 중요하다",
-    explanation: "광전효과: hf ≥ W (일함수)\n아인슈타인의 광전 방정식: hf = W + KE\n임계 진동수: f₀ = W/h 이상이어야 전자가 방출된다.\n빛의 세기가 강해도 진동수가 낮으면 광전자가 방출되지 않는다.",
-    hints: ["hf = W + KE", "임계 진동수의 개념"],
-    solutionSteps: ["광전효과 조건: hf ≥ W", "W: 일함수 (물질 특성)", "f: 빛의 진동수", "f₀ = W/h 이상이어야 함"]
-  },
-  {
-    id: "physics_034",
-    question: "수소 원자에서 n=2에서 n=1로 전자가 떨어질 때, 방출되는 포톤의 에너지는?",
-    type: "calculation",
-    difficulty: "hard",
-    concepts: ["보어모형", "에너지준위", "포톤"],
-    options: [],
-    correctAnswer: "10.2 eV",
-    explanation: "E_n = -13.6 / n² eV\nE₁ = -13.6 eV\nE₂ = -13.6 / 4 = -3.4 eV\nΔE = E₂ - E₁ = -3.4 - (-13.6) = 10.2 eV\n방출 포톤 에너지: 10.2 eV",
-    hints: ["E_n = -13.6/n² eV", "ΔE = E_final - E_initial"],
-    solutionSteps: ["E₁ = -13.6 eV", "E₂ = -13.6/4 = -3.4 eV", "ΔE = -3.4 - (-13.6) = 10.2 eV"]
-  },
-  {
-    id: "physics_035",
-    question: "파동-입자 이중성을 설명하는 드브로이 파장의 공식은?",
-    type: "short_answer",
-    difficulty: "hard",
-    concepts: ["드브로이파장", "파동성", "입자성"],
-    options: [],
-    correctAnswer: "λ = h/p (또는 λ = h/mv)",
-    explanation: "드브로이 파장: λ = h/p\nh: 플랑크 상수 (6.626 × 10⁻³⁴ J·s)\np: 운동량 (= mv)\n모든 입자는 파동성을 가진다.",
-    hints: ["입자의 파장을 나타내는 공식", "h: 플랑크 상수, p: 운동량"],
-    solutionSteps: ["드브로이 파장: λ = h/p", "또는 λ = h/(mv)"]
-  },
-  {
-    id: "physics_036",
-    question: "방사성 핵붕괴의 반감기란?",
-    type: "multiple_choice",
-    difficulty: "easy",
-    concepts: ["방사성붕괴", "반감기", "핵반응"],
-    options: ["방사능이 절반으로 감소하는 시간", "핵이 완전히 붕괴하는 시간", "방사선 에너지가 절반이 되는 시간", "방사선이 검출되지 않는 시간"],
-    correctAnswer: "방사능이 절반으로 감소하는 시간",
-    explanation: "반감기 T₁/₂: 처음 원자핵 수의 절반이 붕괴하는데 걸리는 시간\nN(t) = N₀ × (1/2)^(t/T₁/₂)\nt = T₁/₂일 때, N = N₀/2",
-    hints: ["반감기의 정의", "원자핵 수의 변화"],
-    solutionSteps: ["반감기: 원자핵 수가 절반으로 감소하는 시간", "N = N₀ × (1/2)^(t/T)"]
-  },
+  // Medium (10개)
+  {id:"calc_medium_001",question:"수평면에 놓인 5 kg의 물체를 12 N의 힘으로 끌 때, 마찰력이 2 N이면 물체의 가속도는?",type:"calculation",difficulty:"medium",concepts:["뉴턴의제2법칙","마찰력"],options:[],correctAnswer:"2 m/s²",explanation:"F_net = F - f = 12 - 2 = 10 N. a = F_net/m = 10/5 = 2 m/s²",hints:["합력 계산","F_net = F - f"],solutionSteps:["합력 구하기","뉴턴 제2법칙","계산"]},
+  {id:"calc_medium_002",question:"높이 20 m에서 떨어진 물체가 땅에 닿을 때의 속도는? (g = 10 m/s², 마찰 무시)",type:"calculation",difficulty:"medium",concepts:["에너지보존"],options:[],correctAnswer:"20 m/s",explanation:"에너지 보존: mgh = ½mv². v² = 2gh = 2 × 10 × 20 = 400. v = 20 m/s",hints:["v² = 2gh","포텐셜 에너지 = 운동에너지"],solutionSteps:["에너지 보존","정리","계산"]},
+  {id:"calc_medium_003",question:"20°C의 물 100 g에 1000 J의 열을 가했을 때 최종 온도는? (물의 비열 = 4186 J/(kg·°C))",type:"calculation",difficulty:"medium",concepts:["비열"],options:[],correctAnswer:"약 22.4°C",explanation:"Q = mcΔT. ΔT = Q/(mc) = 1000/(0.1 × 4186) ≈ 2.39°C. 최종온도 = 20 + 2.39 ≈ 22.4°C",hints:["Q = mcΔT","질량을 kg 단위로"],solutionSteps:["ΔT 구하기","최종온도 계산"]},
+  {id:"calc_medium_004",question:"진동수가 두 배가 되고 파장이 반이 되면 파동의 속도는?",type:"calculation",difficulty:"medium",concepts:["파동"],options:[],correctAnswer:"변하지 않는다 (같다)",explanation:"v = fλ. 새로운 속도: v' = 2f × λ/2 = fλ = v. 속도는 변하지 않습니다.",hints:["v = fλ의 관계 유지","f와 λ의 곱 확인"],solutionSteps:["원래 속도","변화 후 속도","비교"]},
+  {id:"calc_medium_005",question:"절대온도가 2배 증가하면 기체의 부피는? (압력 일정)",type:"calculation",difficulty:"medium",concepts:["이상기체법칙"],options:[],correctAnswer:"2배",explanation:"이상기체법칙에서 P 일정: V/T = 상수. T가 2배이면 V도 2배입니다.",hints:["V/T = 상수","온도와 부피의 관계"],solutionSteps:["관계식 확인","T 변화","V 계산"]},
+  {id:"calc_medium_006",question:"자기장 B = 0.5 T에 수직으로 놓인 길이 L = 2 m인 전선에 I = 3 A의 전류가 흐를 때, 전선이 받는 힘은?",type:"calculation",difficulty:"medium",concepts:["자기력"],options:[],correctAnswer:"3 N",explanation:"F = BIL = 0.5 × 3 × 2 = 3 N",hints:["F = BIL","수직일 때 sin(90°) = 1"],solutionSteps:["공식","대입","계산"]},
+  {id:"calc_medium_007",question:"양성자와 전자 사이의 정전력이 1 N이라면, 거리를 2배로 하면 정전력은?",type:"calculation",difficulty:"medium",concepts:["쿨롱의법칙"],options:[],correctAnswer:"0.25 N",explanation:"F ∝ 1/r². r → 2r이면 F' = F/4 = 1/4 = 0.25 N",hints:["F ∝ 1/r²","r이 2배면 F는 1/4"],solutionSteps:["관계식","r 변화","F 계산"]},
+  {id:"calc_medium_008",question:"질량 10 kg인 물체가 20 N의 일정한 힘을 받아 처음 정지 상태에서 10초 동안 가속한다. 최종 속도는?",type:"calculation",difficulty:"medium",concepts:["가속도","속도"],options:[],correctAnswer:"20 m/s",explanation:"a = F/m = 20/10 = 2 m/s². v = u + at = 0 + 2 × 10 = 20 m/s",hints:["가속도 먼저 구하기","v = u + at"],solutionSteps:["a 계산","v 계산"]},
+  {id:"calc_medium_009",question:"수평 거리 100 m를 이동할 때, 거리에 비례하는 저항력이 있다. 평균 힘이 50 N이면 한 일은?",type:"calculation",difficulty:"medium",concepts:["일"],options:[],correctAnswer:"5000 J",explanation:"W = F × s = 50 × 100 = 5000 J",hints:["W = Fs","평균 힘 사용"],solutionSteps:["공식","대입","계산"]},
+  {id:"calc_medium_010",question:"진동의 진폭이 3배가 되면 최대 속도는?",type:"calculation",difficulty:"medium",concepts:["단진동"],options:[],correctAnswer:"3배",explanation:"단진동에서 최대 속도: v_max = ωA. A가 3배이면 v_max도 3배입니다.",hints:["v_max = ωA","진폭과의 관계"],solutionSteps:["최대 속도 공식","A 변화","비율 계산"]},
 
-  // ============ 추가 심화 문제 (6개) ============
-  {
-    id: "physics_037",
-    question: "충돌하는 두 물체의 반발 계수(e) = 0.8이라면 어떤 충돌인가?",
-    type: "multiple_choice",
-    difficulty: "hard",
-    concepts: ["충돌", "반발계수", "탄성성"],
-    options: ["완벽한 탄성충돌 (e=1)", "완벽한 비탄성충돌 (e=0)", "부분탄성충돌 (0<e<1)", "충돌이 일어나지 않음"],
-    correctAnswer: "부분탄성충돌 (0<e<1)",
-    explanation: "반발 계수: e = (분리속도) / (접근속도)\ne = 1: 완벽한 탄성충돌\ne = 0: 완벽한 비탄성충돌 (한덩어리로 붙음)\n0 < e < 1: 부분탄성충돌 (일부 에너지 손실)",
-    hints: ["반발계수의 범위별 충돌 유형", "e의 값에 따른 분류"],
-    solutionSteps: ["반발계수 e = 0.8", "0 < 0.8 < 1", "따라서 부분탄성충돌"]
-  },
-  {
-    id: "physics_038",
-    question: "수평면에 놓인 물체에 수평 방향 힘을 가했을 때 정지 마찰력의 최댓값 f_s = μ_s × N이다. 여기서 N은?",
-    type: "short_answer",
-    difficulty: "easy",
-    concepts: ["마찰력", "수직항력", "정지마찰"],
-    options: [],
-    correctAnswer: "수직항력 (Normal Force)",
-    explanation: "정지마찰력의 최댓값: f_s,max = μ_s × N\nN: 수직항력 (normal force)\n수평면에서는 N = mg (물체의 무게와 같음)\nμ_s: 정지마찰계수",
-    hints: ["μ_s는 마찰계수", "N은 수직 방향의 힘"],
-    solutionSteps: ["정지마찰: f_s,max = μ_s N", "N은 표면이 물체를 지지하는 수직 항력"]
-  },
-  {
-    id: "physics_039",
-    question: "원운동하는 물체의 구심가속도는 반지름 r과 속도 v의 관계에서 a_c = ?",
-    type: "calculation",
-    difficulty: "medium",
-    concepts: ["원운동", "구심가속도", "반지름"],
-    options: [],
-    correctAnswer: "v²/r",
-    explanation: "원운동의 구심가속도: a_c = v²/r = ω²r\nv: 선속도\nω: 각속도\nr: 반지름",
-    hints: ["원운동의 가속도 공식", "v와 r의 관계"],
-    solutionSteps: ["구심가속도: a_c = v²/r", "또는 a_c = ω²r"]
-  },
-  {
-    id: "physics_040",
-    question: "반지름 0.5 m인 원형 궤도에서 4 m/s의 속도로 회전하는 물체의 구심가속도는?",
-    type: "calculation",
-    difficulty: "medium",
-    concepts: ["원운동", "구심가속도"],
-    options: [],
-    correctAnswer: "32 m/s²",
-    explanation: "a_c = v²/r\nv = 4 m/s, r = 0.5 m\na_c = 4² / 0.5 = 16 / 0.5 = 32 m/s²",
-    hints: ["a_c = v²/r", "v² = 16"],
-    solutionSteps: ["공식: a_c = v²/r", "v² = 4² = 16", "a_c = 16 / 0.5 = 32 m/s²"]
-  }
+  // Hard (5개)
+  {id:"calc_hard_001",question:"질량 0.1 kg인 전자가 0.99c의 속도로 이동할 때 상대론적 운동에너지는? (c = 3 × 10⁸ m/s)",type:"calculation",difficulty:"hard",concepts:["상대론적에너지"],options:[],correctAnswer:"약 3.1 × 10¹⁶ J",explanation:"상대론적 운동에너지: KE = (γ - 1)mc². γ = 1/√(1-v²/c²) ≈ 7.09. KE ≈ (7.09-1) × 0.1 × (3×10⁸)² ≈ 3.1 × 10¹⁶ J",hints:["로렌츠 인수","상대론적 질량"],solutionSteps:["로렌츠 인수 계산","상대론적 KE","수치 계산"]},
+  {id:"calc_hard_002",question:"수소 원자의 n=2에서 n=1로 전자가 떨어질 때 방출되는 포톤의 파장은? (E₁ = -13.6 eV, E₂ = -3.4 eV, h = 6.626 × 10⁻³⁴ J·s, c = 3 × 10⁸ m/s)",type:"calculation",difficulty:"hard",concepts:["보어모형"],options:[],correctAnswer:"약 121.5 nm",explanation:"ΔE = E₂ - E₁ = -3.4 - (-13.6) = 10.2 eV = 1.63 × 10⁻¹⁸ J. λ = hc/E = (6.626 × 10⁻³⁴ × 3 × 10⁸) / (1.63 × 10⁻¹⁸) ≈ 121.5 nm",hints:["에너지 차이","E = hf = hc/λ"],solutionSteps:["ΔE 계산","λ = hc/E","단위 변환"]},
+  {id:"calc_hard_003",question:"자유낙하하는 물체가 5초 후의 운동량은? (m = 1 kg, g = 10 m/s²)",type:"calculation",difficulty:"hard",concepts:["운동량"],options:[],correctAnswer:"50 kg·m/s",explanation:"v = gt = 10 × 5 = 50 m/s. p = mv = 1 × 50 = 50 kg·m/s",hints:["속도 먼저 구하기","p = mv"],solutionSteps:["속도 계산","운동량 계산"]},
+  {id:"calc_hard_004",question:"회전하는 원판의 각속도가 2배가 되면, 회전 동에너지(회전 운동에너지)는?",type:"calculation",difficulty:"hard",concepts:["회전에너지"],options:[],correctAnswer:"4배",explanation:"회전 운동에너지: E = ½Iω². ω가 2배이면 E' = ½I(2ω)² = 4 × ½Iω² = 4E",hints:["회전 운동에너지","각속도의 제곱"],solutionSteps:["공식 확인","ω 변화","에너지 비율"]},
+  {id:"calc_hard_005",question:"파동이 매질1에서 매질2로 이동할 때, 속도가 2배가 되고 진동수는 같으면 파장의 변화는?",type:"calculation",difficulty:"hard",concepts:["파동의굴절"],options:[],correctAnswer:"2배",explanation:"v = fλ에서 f는 같고 v가 2배이면 λ' = v'/f = 2v/f = 2λ",hints:["v = fλ","진동수 보존"],solutionSteps:["관계식","f 불변","λ 계산"]},
+
+  // ================ 서술형 (25개) ================
+  // Easy (10개)
+  {id:"essay_easy_001",question:"뉴턴의 제1법칙(관성의 법칙)을 설명하고, 일상생활의 예를 들어보세요.",type:"essay",difficulty:"easy",concepts:["관성"],options:[],correctAnswer:"뉴턴의 제1법칙은 외력이 작용하지 않으면 정지한 물체는 계속 정지하고, 운동하는 물체는 계속 일정한 속도로 운동한다는 법칙입니다. 예: 버스가 급히 멈출 때 승객이 앞으로 쏠린다, 이동 중인 자동차에서 물건을 던지면 앞으로 날아간다 등.",explanation:"관성의 법칙은 물체가 외부 힘 없이 현재 상태를 유지하려는 성질을 설명합니다. 이는 물체의 질량과 관련이 있으며, 질량이 클수록 관성이 큽니다.",hints:["외력이 없을 때의 물체 운동","일상 예시 찾기"],solutionSteps:["법칙의 정의","수식 표현","일상 사례"]},
+  {id:"essay_easy_002",question:"포물선운동에서 수평 방향과 수직 방향 운동이 독립적임을 설명하세요.",type:"essay",difficulty:"easy",concepts:["포물선운동"],options:[],correctAnswer:"포물선운동은 초기 속도를 수평과 수직 성분으로 분해할 수 있으며, 수평 방향에는 중력이 작용하지 않아 등속운동을 하고, 수직 방향에는 중력이 작용하여 등가속도운동을 합니다. 따라서 두 운동은 독립적으로 진행됩니다.",explanation:"이 독립성 때문에 수평 속도의 크기는 물체가 떨어지는 시간에 영향을 주지 않습니다.",hints:["수평과 수직의 힘","중력의 역할"],solutionSteps:["성분 분해","각 방향의 운동","독립성 설명"]},
+  {id:"essay_easy_003",question:"에너지 보존 법칙이 무엇이며, 일상에서의 예를 들어 설명하세요.",type:"essay",difficulty:"easy",concepts:["에너지보존"],options:[],correctAnswer:"에너지 보존 법칙은 고립된 계의 총 에너지는 일정하며, 에너지는 형태만 변할 뿐 생성되거나 소멸될 수 없다는 법칙입니다. 예: 진자의 포텐셜 에너지가 운동에너지로 변환되며 진동을 계속하고, 자동차 브레이크 에너지는 열에너지로 변환됩니다.",explanation:"이 법칙은 모든 물리 현상의 기초가 되는 가장 기본적인 원리입니다.",hints:["총 에너지 불변","에너지 형태 변환"],solutionSteps:["법칙의 정의","변환 과정","사례"]},
+  {id:"essay_easy_004",question:"절대온도와 섭씨온도의 관계를 설명하세요.",type:"essay",difficulty:"easy",concepts:["절대온도"],options:[],correctAnswer:"절대온도(켈빈)는 절대영도를 0으로 시작하여 측정한 온도이며, 섭씨온도는 물의 어는점을 0으로 시작합니다. 관계식: T(K) = t(°C) + 273.15. 절대영도는 -273.15°C = 0K입니다.",explanation:"절대온도는 입자의 운동 에너지와 직접 관련이 있으므로 물리학에서 자주 사용됩니다.",hints:["절대영도의 의미","단위 변환"],solutionSteps:["절대온도의 정의","관계식","예시"]},
+  {id:"essay_easy_005",question:"파동의 파장, 진동수, 속도의 관계를 설명하고, 각각의 의미를 서술하세요.",type:"essay",difficulty:"easy",concepts:["파동"],options:[],correctAnswer:"파동의 속도는 v = fλ로 나타내며, 여기서 f는 진동수(1초에 반복되는 횟수), λ는 파장(한 파동의 길이)입니다. 매질이 바뀌어도 진동수는 변하지 않지만 속도와 파장은 변합니다.",explanation:"이 관계식은 파동의 가장 기본적인 성질을 나타냅니다.",hints:["각 물리량의 정의","단위"],solutionSteps:["각각의 의미","관계식","중요성"]},
+  {id:"essay_easy_006",question:"도플러 효과를 설명하고, 일상에서의 예를 들어보세요.",type:"essay",difficulty:"easy",concepts:["도플러효과"],options:[],correctAnswer:"도플러 효과는 음원이나 관찰자가 움직일 때 관측되는 주파수가 변하는 현상입니다. 음원이 접근하면 주파수가 증가하여 음이 높아지고, 멀어지면 주파수가 감소하여 음이 낮아집니다. 예: 앰뷸런스가 다가올 때 사이렌 음이 높다가, 지나간 후 음이 낮아집니다.",explanation:"이 현상은 음파뿐 아니라 빛에도 적용되며, 우주 천체의 이동 속도를 측정하는 데 사용됩니다.",hints:["음원의 상대 운동","주파수 변화"],solutionSteps:["현상 설명","접근/멀어짐","사례"]},
+  {id:"essay_easy_007",question:"정적 마찰력과 동적 마찰력의 차이를 설명하세요.",type:"essay",difficulty:"easy",concepts:["마찰력"],options:[],correctAnswer:"정적 마찰력은 물체가 운동하기 전에 표면의 거칠기로 인해 생기는 힘이며, 최대값은 f_s,max = μ_s N입니다. 동적 마찰력은 물체가 이미 운동 중일 때 생기는 힘이며, f_k = μ_k N입니다. 일반적으로 μ_s > μ_k이므로 정적 마찰력이 더 큽니다.",explanation:"물체를 움직이기 시작할 때 많은 힘이 필요한 이유는 정적 마찰력 때문입니다.",hints:["움직이지 않음 vs 움직임","마찰계수"],solutionSteps:["정의","비교","응용"]},
+  {id:"essay_easy_008",question:"원운동에서 구심력의 역할을 설명하세요.",type:"essay",difficulty:"easy",concepts:["원운동"],options:[],correctAnswer:"원운동에서 구심력은 원의 중심을 향하여 작용하는 힘으로, 물체의 방향을 계속 바꿔 원형 궤도를 유지시킵니다. 구심력이 없으면 물체는 관성에 의해 직선으로 이동합니다. 구심력의 크기는 F = mv²/r입니다.",explanation:"달이 지구 주위를 도는 것, 차가 회전하는 것 모두 구심력이 작용하는 예입니다.",hints:["중심으로의 가속","힘의 역할"],solutionSteps:["구심력의 정의","방향","필요성"]},
+  {id:"essay_easy_009",question:"플레밍의 왼손 법칙(왼손의 법칙)을 설명하세요.",type:"essay",difficulty:"easy",concepts:["자기력"],options:[],correctAnswer:"플레밍의 왼손 법칙: 왼손의 엄지손가락이 전류 방향, 집게손가락이 자기장 방향을 가리킬 때, 중지손가락이 가리키는 방향이 힘의 방향입니다. 자기장 속에서 전류가 흐르는 도체가 받는 힘의 방향을 결정합니다.",explanation:"이 법칙은 전동기 등 많은 전자 기기의 원리에 사용됩니다.",hints:["손가락의 역할","방향"],solutionSteps:["법칙 설명","각 손가락의 의미","응용"]},
+  {id:"essay_easy_010",question:"작용-반작용 법칙(뉴턴의 제3법칙)을 설명하고 예를 들어보세요.",type:"essay",difficulty:"easy",concepts:["작용반작용"],options:[],correctAnswer:"작용-반작용 법칙: 물체 A가 물체 B에 가하는 힘과 물체 B가 물체 A에 가하는 힘은 크기가 같고 방향이 반대입니다. 예: 책이 책상을 누르는 힘과 책상이 책을 지지하는 힘은 크기가 같고 방향이 반대이며, 로켓이 가스를 배출하는 힘과 가스가 로켓을 추진하는 힘도 작용-반작용입니다.",explanation:"이 법칙은 모든 상호작용에 적용되며, 혼동하지 않기 위해 물체를 명확히 해야 합니다.",hints:["같은 크기, 반대 방향","두 물체 간의 상호작용"],solutionSteps:["법칙의 정의","예시 분석","중요성"]},
+
+  // Medium (10개)
+  {id:"essay_medium_001",question:"완벽한 탄성충돌과 완벽한 비탄성충돌의 차이를 설명하세요.",type:"essay",difficulty:"medium",concepts:["충돌"],options:[],correctAnswer:"탄성 충돌: 충돌 전후로 운동량과 운동에너지가 모두 보존됩니다. 충돌 후 물체들이 분리됩니다. 비탄성 충돌: 운동량은 보존되지만 운동에너지는 일부 손실됩니다. 완벽한 비탄성 충돌: 충돌 후 물체들이 한덩어리가 되어 움직입니다.",explanation:"현실의 모든 충돌은 부분탄성충돌입니다. 스틸 공끼리의 충돌은 탄성에 가깝고, 찰흙끼리는 완벽한 비탄성에 가깝습니다.",hints:["보존되는 물리량","에너지 손실"],solutionSteps:["탄성충돌","비탄성충돌","비교"]},
+  {id:"essay_medium_002",question:"열역학 제1법칙과 제2법칙을 각각 설명하세요.",type:"essay",difficulty:"medium",concepts:["열역학"],options:[],correctAnswer:"제1법칙: ΔU = Q - W. 계의 내부에너지 변화는 흡수한 열에서 한 일을 뺀 것과 같습니다. 이는 에너지 보존 법칙입니다. 제2법칙: 고립된 계의 엔트로피는 항상 증가합니다(또는 같음). 열은 저온에서 고온으로 자발적으로 이동할 수 없습니다.",explanation:"제1법칙은 에너지가 보존됨을 말하고, 제2법칙은 실제로 일어날 수 있는 방향을 제한합니다.",hints:["내부에너지","엔트로피"],solutionSteps:["제1법칙","제2법칙","비교"]},
+  {id:"essay_medium_003",question:"광전효과를 설명하고, 이 현상이 입자-파동 이중성의 증거가 되는 이유를 서술하세요.",type:"essay",difficulty:"medium",concepts:["광전효과","이중성"],options:[],correctAnswer:"광전효과: 빛이 금속 표면에 닿으면 전자가 방출되는 현상입니다. hf ≥ W를 만족하는 일정 이상의 진동수를 가진 빛만 전자를 방출할 수 있습니다. 이는 빛이 에너지를 가진 입자(광자)처럼 행동하는 것을 보여주며, 파동의 진동수 개념이 필요하므로 파동-입자 이중성을 증명합니다.",explanation:"이 현상은 양자론의 발전을 이끈 중요한 실험입니다.",hints:["입자성과 파동성","임계 진동수"],solutionSteps:["현상 설명","입자성","파동성"]},
+  {id:"essay_medium_004",question:"전자기 유도(파라데이 법칙)를 설명하고, 발전기의 원리를 간단히 서술하세요.",type:"essay",difficulty:"medium",concepts:["전자기유도"],options:[],correctAnswer:"파라데이 법칙: 코일을 통과하는 자기선속이 변하면 유도 기전력이 발생합니다(E = -dΦ/dt). 발전기는 자기장 속에서 코일을 회전시켜 자기선속의 변화를 만들고, 이로 인한 유도 기전력으로 전류를 생성합니다. 코일이 회전하면서 기전력이 번갈아 바뀌므로 교류전류를 생성합니다.",explanation:"전 세계의 대부분의 전기는 이 원리로 발전됩니다.",hints:["자기선속 변화","코일 회전"],solutionSteps:["파라데이 법칙","발전기 구조","동작 원리"]},
+  {id:"essay_medium_005",question:"보어 모형에서 전자의 에너지 준위를 설명하고, 왜 음수인지 설명하세요.",type:"essay",difficulty:"medium",concepts:["보어모형"],options:[],correctAnswer:"보어 모형에서 전자의 에너지: E_n = -13.6/n² eV (n = 1, 2, 3, ...). 에너지가 음수인 이유는 전자가 원자핵에 속박되어 있기 때문입니다. 전자를 분리하려면 13.6 eV의 에너지(이온화 에너지)를 공급해야 합니다. 높은 궤도(n이 큼)로 갈수록 에너지는 증가하여 0에 가까워집니다.",explanation:"음수 에너지는 속박 상태를 나타내는 표준 표기법입니다.",hints:["속박 에너지","이온화","궤도"],solutionSteps:["에너지식","음수의 의미","수치 해석"]},
+  {id:"essay_medium_006",question:"특수상대성이론의 두 공준을 설명하세요.",type:"essay",difficulty:"medium",concepts:["상대성"],options:[],correctAnswer:"공준 1(상대성 원리): 모든 관성계에서 물리 법칙은 같다. 공준 2(광속 불변): 모든 관성계에서 광속은 동일하다(약 3 × 10⁸ m/s). 이 두 공준으로부터 시간팽창, 길이수축, 질량-에너지 동치 등 혁명적인 결과가 유도됩니다.",explanation:"이 이론은 뉴턴 역학을 넘어서는 근대 물리학의 기초입니다.",hints:["아인슈타인의 공준","결과"],solutionSteps:["공준 1","공준 2","의의"]},
+  {id:"essay_medium_007",question:"불확정성 원리를 설명하고, 이것이 고전역학과 다른 점을 서술하세요.",type:"essay",difficulty:"medium",concepts:["불확정성원리"],options:[],correctAnswer:"불확정성 원리: 입자의 위치와 운동량을 동시에 임의의 정확도로 측정할 수 없습니다(Δx·Δp ≥ ℏ/2). 고전역학에서는 입자의 위치와 속도를 동시에 정확히 알 수 있고, 이로부터 미래를 완벽히 예측할 수 있다고 가정합니다. 그러나 양자역학에서는 근본적인 불확실성이 존재하며, 오직 확률로만 예측할 수 있습니다.",explanation:"이는 단순한 측정 오류가 아닌 자연의 근본적인 성질입니다.",hints:["고전 vs 양자","확률성"],solutionSteps:["원리 설명","비교","의의"]},
+  {id:"essay_medium_008",question:"엔트로피를 설명하고, 왜 우주의 엔트로피는 항상 증가하는지 서술하세요.",type:"essay",difficulty:"medium",concepts:["엔트로피"],options:[],correctAnswer:"엔트로피: 계의 무질서도 또는 이용 가능한 에너지의 감소를 나타내는 물리량입니다. 열역학 제2법칙에 따라 고립된 계의 엔트로피는 항상 증가(또는 불변)합니다. 이는 자연 현상이 비가역적(일방향적)임을 의미합니다. 예: 따뜻한 물과 찬 물을 섞으면 중간 온도의 물이 되지만, 다시 분리되지 않습니다.",explanation:"엔트로피 증가는 우주의 운명(열사)(Heat Death)을 암시합니다.",hints:["무질서도","가역성","방향성"],solutionSteps:["엔트로피 정의","제2법칙","비가역성"]},
+  {id:"essay_medium_009",question:"반도체의 n형과 p형을 설명하고, 이들이 전자 장치에 어떻게 사용되는지 서술하세요.",type:"essay",difficulty:"medium",concepts:["반도체"],options:[],correctAnswer:"n형 반도체: 반도체에 5가 원소(인, 비소 등)를 도핑하면 여분의 전자가 있어 음수 전하 운반자가 주가 됩니다. p형 반도체: 반도체에 3가 원소(붕소, 갈륨 등)를 도핑하면 전자 결손(정공)이 생겨 양수 전하 운반자가 주가 됩니다. pn 접합에서 p형과 n형이 만나면 다이오드나 트랜지스터 등의 전자 소자를 만들 수 있습니다.",explanation:"현대 모든 전자기기는 반도체 기술에 기반하고 있습니다.",hints:["도핑","전하 운반자"],solutionSteps:["n형","p형","응용"]},
+  {id:"essay_medium_010",question:"블랙홀과 사건의 지평선을 설명하세요.",type:"essay",difficulty:"medium",concepts:["블랙홀"],options:[],correctAnswer:"블랙홀: 중력이 너무 강해서 빛도 탈출할 수 없는 천체입니다. 사건의 지평선: 블랙홀의 경계이며, 이 경계 내에서는 어떤 신호도 탈출할 수 없습니다. 슈바르츠실드 반지름: r_s = 2GM/c². 별이 이 반지름 이하로 압축되면 블랙홀이 됩니다. 일반상대성이론의 예측이 실험으로 확인된 천체입니다.",explanation:"블랙홀은 시공간의 극한 상태를 연구하는 중요한 대상입니다.",hints:["중력","광속","시공간"],solutionSteps:["정의","특성","형성"]},
+
+  // Hard (5개)
+  {id:"essay_hard_001",question:"양자 얽힘(Quantum Entanglement)이란 무엇이며, 왜 \"유령 같은 원거리 작용\"이라 불렸는지 설명하세요.",type:"essay",difficulty:"hard",concepts:["양자얽힘"],options:[],correctAnswer:"양자 얽힘: 두 입자가 양자적으로 얽혀 있으면, 한 입자의 상태를 측정하는 즉시 다른 입자의 상태가 결정됩니다(거리와 무관). 아인슈타인은 이를 \"유령 같은 원거리 작용\"이라 부르며 의심했습니다. 이는 상대성 이론에서 광속보다 빠른 통신은 불가능하지만, 얽힌 입자들은 즉각적으로 상호 연관되는 것처럼 보이기 때문입니다. 현재 이 현상은 실험으로 확인되었으며, 양자컴퓨터와 양자 암호화에 사용됩니다.",explanation:"이는 양자역학이 얼마나 비직관적인지 보여주는 좋은 예입니다.",hints:["상관관계","비국소성","실험 증거"],solutionSteps:["정의","특성","역사","응용"]},
+  {id:"essay_hard_002",question:"암흑물질과 암흑에너지의 구별, 그리고 우주에 미치는 영향을 설명하세요.",type:"essay",difficulty:"hard",concepts:["우주론"],options:[],correctAnswer:"암흑물질: 빛을 내지 않지만 중력을 가하는 물질입니다. 우주의 약 27%를 차지하며, 은하의 회전 곡선을 설명하고 은하단을 함께 묶어줍니다. 암흑에너지: 우주 전체를 채우는 에너지로, 우주의 가속 팽창을 일으킵니다. 우주의 약 68%를 차지합니다. 상반-정상물질은 약 5%입니다. 암흑물질이 없으면 은하가 형성될 수 없었고, 암흑에너지가 없으면 우주는 감속할 것입니다.",explanation:"우주의 95%가 아직 무엇인지 명확하지 않으며, 이는 21세기 물리학의 큰 미스터리입니다.",hints:["분포","효과","측정 방법"],solutionSteps:["암흑물질","암흑에너지","영향","미해결 문제"]},
+  {id:"essay_hard_003",question:"끈 이론의 기본 개념을 설명하고, 이것이 양자중력을 어떻게 해결하려고 하는지 서술하세요.",type:"essay",difficulty:"hard",concepts:["끈이론"],options:[],correctAnswer:"끈 이론: 기본 입자를 점이 아닌 진동하는 끈으로 봅니다. 서로 다른 진동 모드가 다른 입자를 나타냅니다. 특정 모드는 중력자(graviton)를 나타내어 양자중력을 자연스럽게 포함합니다. 양자역학과 일반상대성이론의 불일치를 해결할 수 있는 가능성이 있습니다. 그러나 검증이 어렵고, 추가 차원(보통 10~11차원)이 필요합니다.",explanation:"끈 이론은 현재 가장 유망한 양자중력 후보 이론이지만, 아직 실험적 증거는 없습니다.",hints:["기본 단위","대칭성","초대칭"],solutionSteps:["개념","입자","중력","문제점"]},
+  {id:"essay_hard_004",question:"정보 역설(Information Paradox)이란 무엇이며, 블랙홀의 정보 소실 문제를 설명하세요.",type:"essay",difficulty:"hard",concepts:["블랙홀","양자역학"],options:[],correctAnswer:"정보 역설: 블랙홀이 호킹 복사로 완전히 증발하면 그 안에 있던 모든 정보가 사라집니다. 그러나 양자역학은 정보가 보존되어야 한다고 말합니다. 이는 양자역학과 일반상대성이론 사이의 근본적 모순입니다. 현재 가설: 호킹 복사의 미세한 상관관계가 정보를 운반하거나, 완전히 새로운 물리학이 필요할 수 있습니다.",explanation:"이 문제는 30년 이상 물리학자들이 해결하려 노력하고 있습니다.",hints:["정보 보존","호킹 복사"],solutionSteps:["역설","원인","현재 이론","시사점"]},
+  {id:"essay_hard_005",question:"대칭성과 보존 법칙의 관계(뇌터 정리)를 설명하고, 예를 들어보세요.",type:"essay",difficulty:"hard",concepts:["뇌터정리","대칭성"],options:[],correctAnswer:"뇌터 정리: 계의 작용이 어떤 연속적 대칭성을 가지면, 그에 대응하는 보존량이 존재합니다. 예: 시간 이동 대칭(시간 균등) → 에너지 보존, 공간 이동 대칭(공간 균등) → 운동량 보존, 회전 대칭 → 각운동량 보존. 이는 물리 법칙의 깊은 구조를 드러내며, 모든 보존 법칙의 근원입니다.",explanation:"뇌터의 정리는 20세기 물리학의 가장 중요한 통찰 중 하나입니다.",hints:["대칭성과 보존","연속성"],solutionSteps:["정리","예시","의의"]}
 ];
 
-// 내보내기 (사용 방식)
+// 내보내기
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = DEMO_PROBLEMS;
 }
