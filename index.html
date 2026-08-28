@@ -9,6 +9,7 @@
     <script>
         // demo-problems.js 로드 확인 - 중복 로드 방지
         let demoProblemsLoaded = false;
+        let demoProblemsLoadAttempted = false;
         
         function checkDemoProblems() {
             console.log('Checking DEMO_PROBLEMS...');
@@ -36,14 +37,17 @@
         window.addEventListener('load', function() {
             setTimeout(() => {
                 if (!demoProblemsLoaded && (!window.DEMO_PROBLEMS || window.DEMO_PROBLEMS.length === 0)) {
-                    console.warn('DEMO_PROBLEMS not loaded, trying alternative path...');
-                    const script = document.createElement('script');
-                    script.src = './data/demo-problems.js';
-                    script.onerror = () => console.error('Failed to load demo-problems.js');
-                    script.onload = () => {
-                        setTimeout(checkDemoProblems, 500);
-                    };
-                    document.head.appendChild(script);
+                    if (!demoProblemsLoadAttempted) {
+                        console.warn('DEMO_PROBLEMS not loaded, trying alternative path...');
+                        demoProblemsLoadAttempted = true;
+                        const script = document.createElement('script');
+                        script.src = './data/demo-problems.js';
+                        script.onerror = () => console.error('Failed to load demo-problems.js');
+                        script.onload = () => {
+                            setTimeout(checkDemoProblems, 500);
+                        };
+                        document.head.appendChild(script);
+                    }
                 } else {
                     checkDemoProblems();
                 }

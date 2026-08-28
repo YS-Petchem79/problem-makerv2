@@ -2,7 +2,7 @@
 // 객관식 25개, 단답형 25개, 계산형 25개, 서술형 25개
 // 각 유형별 난이도: easy 10개, medium 10개, hard 5개
 
-const DEMO_PROBLEMS = [
+window.DEMO_PROBLEMS = [
   // ================ 객관식 (25개) ================
   // Easy (10개)
   {id:"mc_easy_001",question:"물체의 속도가 일정하게 증가하는 운동을 무엇이라 하는가?",type:"multiple_choice",difficulty:"easy",concepts:["등가속도운동"],options:["균등운동","등가속도운동","원운동","포물선운동"],correctAnswer:"등가속도운동",explanation:"속도가 일정하게 증가하는 운동은 등가속도운동입니다. 이는 일정한 가속도를 가진 운동입니다.",hints:["속도가 계속 증가한다는 것은?","일정한 가속도를 생각해보세요"],solutionSteps:["속도 변화의 의미 파악","가속도의 정의 확인","정답 선택"]},
