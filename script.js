@@ -500,7 +500,10 @@ class UIManager {
         if (element.classList.contains('disabled')) return;
         element.classList.add('disabled');
 
-        const isCorrect = selectedOption === problem.correctAnswer;
+        // 공백을 trim하여 답변 비교 (정확한 비교)
+        const userAnswerTrimmed = selectedOption.trim();
+        const correctAnswerTrimmed = problem.correctAnswer.trim();
+        const isCorrect = userAnswerTrimmed === correctAnswerTrimmed;
 
         if (isCorrect) {
             element.style.backgroundColor = '#dcfce7';
@@ -515,13 +518,14 @@ class UIManager {
             element.style.fontWeight = '600';
             this.vibrate([100, 50, 100]);
 
+            // trim된 사용자 답변을 저장
             this.store.addNote({
                 problemId: problem.id,
                 title: problem.title,
                 content: problem.content,
                 correctAnswer: problem.correctAnswer,
                 explanation: problem.explanation,
-                userAnswer: selectedOption,
+                userAnswer: userAnswerTrimmed, // trim된 답변 저장
                 concepts: problem.concepts,
                 attempts: (problem.attempts || 0) + 1
             });
@@ -599,11 +603,20 @@ class UIManager {
                     </div>
 
                     <div style="text-align: center; margin-top: 20px; color: #6b7280; font-size: 0.9rem;">
-                        💡 보기를 클릭하면 자동으로 다음 문제로 넘어갑니다
+                        💡 정답을 선택하면 다음 버튼이 활성화됩니다. 오답은 정답을 확인할 수 있습니다.
                     </div>
                 </div>
             </div>
         `;
+
+        // 다음 문제 버튼 초기화 (새 문제 표시 시 비활성화)
+        const nextBtn = document.getElementById('nextBtn');
+        if (nextBtn) {
+            nextBtn.disabled = true;
+            nextBtn.style.opacity = '0.5';
+            nextBtn.style.cursor = 'not-allowed';
+            nextBtn.textContent = '다음 문제';
+        }
 
         modal.classList.remove('hidden');
     }
@@ -615,37 +628,49 @@ class UIManager {
         if (element.classList.contains('disabled')) return;
         element.classList.add('disabled');
 
-        const isCorrect = selectedOption === problem.correctAnswer;
+        // 공백을 trim하여 답변 비교 (정확한 비교)
+        const userAnswerTrimmed = selectedOption.trim();
+        const correctAnswerTrimmed = problem.correctAnswer.trim();
+        const isCorrect = userAnswerTrimmed === correctAnswerTrimmed;
+
+        const nextBtn = document.getElementById('nextBtn');
 
         if (isCorrect) {
+            // ✅ 정답 - 초록색 표시 + 버튼 활성화 (수동 진행)
             element.style.backgroundColor = '#dcfce7';
             element.style.borderColor = '#10b981';
             element.style.color = '#10b981';
             element.style.fontWeight = '600';
             this.store.updateProblem(problemId, { answered: true });
 
-            setTimeout(() => {
-                this.nextQuizProblem();
-            }, 800);
+            // 다음 문제 버튼 활성화
+            if (nextBtn) {
+                nextBtn.disabled = false;
+                nextBtn.style.opacity = '1';
+                nextBtn.style.cursor = 'pointer';
+            }
         } else {
+            // ❌ 오답 - 빨간색 표시 + 정답 표시 + 버튼 비활성화
             element.style.backgroundColor = '#fee2e2';
             element.style.borderColor = '#ef4444';
             element.style.color = '#ef4444';
             element.style.fontWeight = '600';
             this.vibrate([100, 50, 100]);
 
+            // trim된 사용자 답변을 저장
             this.store.addNote({
                 problemId: problem.id,
                 title: problem.title,
                 content: problem.content,
                 correctAnswer: problem.correctAnswer,
                 explanation: problem.explanation,
-                userAnswer: selectedOption,
+                userAnswer: userAnswerTrimmed, // trim된 답변 저장
                 concepts: problem.concepts,
                 attempts: (problem.attempts || 0) + 1
             });
             this.store.updateProblem(problemId, { isWrong: true });
 
+            // 정답을 초록색으로 표시
             const options = document.querySelectorAll(`[data-problem-id="${problemId}"]`);
             options.forEach(opt => {
                 if (opt.getAttribute('data-option') === problem.correctAnswer.replace(/"/g, '&quot;')) {
@@ -656,9 +681,12 @@ class UIManager {
                 }
             });
 
-            setTimeout(() => {
-                this.nextQuizProblem();
-            }, 1500);
+            // 다음 문제 버튼 비활성화 유지 (오답은 다음 진행 불가)
+            if (nextBtn) {
+                nextBtn.disabled = true;
+                nextBtn.style.opacity = '0.5';
+                nextBtn.style.cursor = 'not-allowed';
+            }
         }
     }
 
