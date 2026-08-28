@@ -5,19 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>전공 특화 문제집 메이커 - AI 문제 생성</title>
     <!-- 데모 데이터 로드 (GitHub Pages 배포용) -->
-    <script src="/data/demo-problems.js"></script>
+    <script src="./data/demo-problems.js"></script>
     <script>
         // demo-problems.js 로드 확인
-        window.addEventListener('load', function() {
-            if (!window.DEMO_PROBLEMS || window.DEMO_PROBLEMS.length === 0) {
-                console.warn('DEMO_PROBLEMS not loaded, trying alternative path...');
-                const script = document.createElement('script');
-                script.src = './data/demo-problems.js';
-                script.onload = () => console.log('DEMO_PROBLEMS loaded from fallback path');
-                document.head.appendChild(script);
-            } else {
-                console.log('✓ DEMO_PROBLEMS loaded:', window.DEMO_PROBLEMS.length, 'problems');
+        function checkDemoProblems() {
+            console.log('Checking DEMO_PROBLEMS...');
+            if (!window.DEMO_PROBLEMS) {
+                console.error('DEMO_PROBLEMS is undefined');
+                return false;
             }
+            if (!Array.isArray(window.DEMO_PROBLEMS)) {
+                console.error('DEMO_PROBLEMS is not an array:', typeof window.DEMO_PROBLEMS);
+                return false;
+            }
+            console.log('✓ DEMO_PROBLEMS loaded:', window.DEMO_PROBLEMS.length, 'problems');
+            if (window.DEMO_PROBLEMS.length > 0) {
+                console.log('First problem sample:', window.DEMO_PROBLEMS[0].id, window.DEMO_PROBLEMS[0].type, window.DEMO_PROBLEMS[0].difficulty);
+            }
+            return true;
+        }
+        
+        // 페이지 로드 후 3초 후 재확인 (동적 로드 완료 대기)
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                if (!checkDemoProblems()) {
+                    console.warn('Trying alternative path...');
+                    const script = document.createElement('script');
+                    script.src = './data/demo-problems.js';
+                    script.onload = () => {
+                        setTimeout(checkDemoProblems, 500);
+                    };
+                    document.head.appendChild(script);
+                }
+            }, 500);
         });
     </script>
     <style>
@@ -383,8 +403,27 @@
 
         function generateProblemsWithDemo(difficulties, types, count) {
             console.log('데모 문제 생성 시작:', { difficulties, types, count });
+            console.log('DEMO_PROBLEMS 확인:', {
+                exists: !!window.DEMO_PROBLEMS,
+                isArray: Array.isArray(window.DEMO_PROBLEMS),
+                length: window.DEMO_PROBLEMS ? window.DEMO_PROBLEMS.length : 0
+            });
+            
             // data/demo-problems.js에서 로드된 DEMO_PROBLEMS 사용
-            quizData = (window.DEMO_PROBLEMS || []).filter(q => difficulties.includes(q.difficulty) && types.includes(q.type));
+            const allProblems = window.DEMO_PROBLEMS || [];
+            console.log('모든 문제 개수:', allProblems.length);
+            
+            if (allProblems.length > 0) {
+                console.log('샘플 문제:', allProblems[0]);
+            }
+            
+            quizData = allProblems.filter(q => {
+                const difficultyMatch = difficulties.includes(q.difficulty);
+                const typeMatch = types.includes(q.type);
+                if (!difficultyMatch) console.warn('난이도 미스매치:', q.id, 'q.difficulty:', q.difficulty, 'selected:', difficulties);
+                if (!typeMatch) console.warn('타입 미스매치:', q.id, 'q.type:', q.type, 'selected:', types);
+                return difficultyMatch && typeMatch;
+            });
             console.log('필터링된 문제:', quizData.length, '개');
             
             if (quizData.length === 0) {
